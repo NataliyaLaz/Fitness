@@ -10,17 +10,17 @@ import UIKit
 class CalendarView: UIView {
     
     private let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .none
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
+    
     private let idCalendarCell = "idCalendarCell"
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViews()
@@ -28,7 +28,6 @@ class CalendarView: UIView {
         setDelegates()
         
         collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: idCalendarCell)
-        
     }
     
     required init?(coder: NSCoder) {

@@ -18,14 +18,6 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
-//    private let calendarView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .specialGreen
-//        view.layer.cornerRadius = 10
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "User Name"
@@ -55,6 +47,7 @@ class MainViewController: UIViewController {
     }()
     
     private let calendarView = CalendarView()
+    private let weatherView = WeatherView()
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -77,6 +70,7 @@ class MainViewController: UIViewController {
         view.addSubview(userPhotoImageView)
         view.addSubview(userNameLabel)
         view.addSubview(addWorkoutButton)
+        view.addSubview(weatherView)
         
     
     }
@@ -96,7 +90,6 @@ extension MainViewController {
             userPhotoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             userPhotoImageView.heightAnchor.constraint(equalToConstant: 100),
             userPhotoImageView.widthAnchor.constraint(equalToConstant: 100)
-                                    
         ])
         
         NSLayoutConstraint.activate([
@@ -104,7 +97,6 @@ extension MainViewController {
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             calendarView.heightAnchor.constraint(equalToConstant: 70)
-                                    
         ])
         
         NSLayoutConstraint.activate([
@@ -118,6 +110,13 @@ extension MainViewController {
             addWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             addWorkoutButton.heightAnchor.constraint(equalToConstant: 80),
             addWorkoutButton.widthAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            weatherView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 5),
+            weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            weatherView.leadingAnchor.constraint(equalTo: addWorkoutButton.trailingAnchor, constant: 10),
+            weatherView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 }
