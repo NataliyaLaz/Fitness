@@ -30,8 +30,8 @@ class WeatherView: UIView {
     
     private let weatherAdviceLabel: UILabel = {
         let label = UILabel()
-        label.font = .robotoMedium12()
         label.text = "The best time to have training outdoors. Finish your day with running"
+        label.font = .robotoMedium12()
         label.textColor = .specialLightBrown
         label.numberOfLines = 2
         label.minimumScaleFactor = 0.8

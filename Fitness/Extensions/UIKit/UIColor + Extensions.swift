@@ -19,5 +19,5 @@ extension UIColor {
     static let specialYellow = #colorLiteral(red: 1, green: 0.831372549, blue: 0, alpha: 1)
     static let specialLightBrown = #colorLiteral(red: 0.6509803922, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
     static let specialBrown = #colorLiteral(red: 0.9019607843, green: 0.8823529412, blue: 0.8196078431, alpha: 1)
-    static let specialBlack = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    static let specialBlack = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
 }

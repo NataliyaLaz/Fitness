@@ -47,13 +47,10 @@ class CalendarView: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
-    
 }
 //MARK: - UICollectionViewDelegate
 
 extension CalendarView: UICollectionViewDelegate {
-    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("collectionViewTap")
@@ -73,7 +70,6 @@ extension CalendarView: UICollectionViewDelegateFlowLayout{
         3
     }
 }
-
 
 //MARK: - UICollectionViewDataSource
 
@@ -103,4 +99,5 @@ extension CalendarView {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
             ])
     }
+    
 }

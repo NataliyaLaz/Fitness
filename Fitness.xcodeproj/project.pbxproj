@@ -21,6 +21,7 @@
 		8826BB60281D546800C82AFC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB5F281D546800C82AFC /* CalendarView.swift */; };
 		8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */; };
 		8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DA281E82C300E3B8F5 /* WeatherView.swift */; };
+		8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		8826BB5F281D546800C82AFC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		8829C0DA281E82C300E3B8F5 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */,
+				8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				880FB41D2819C56E002DB701 /* UIColor + Extensions.swift in Sources */,
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
 				880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */,
+				8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */,
 				880FB3FF2819BCBB002DB701 /* MainViewController.swift in Sources */,
 				8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */,
 				880FB3FB2819BCBB002DB701 /* AppDelegate.swift in Sources */,
