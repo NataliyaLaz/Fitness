@@ -62,7 +62,18 @@ class MainViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.bounces = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delaysContentTouches = false
+      // tableView.isHidden = true
         return tableView
+    }()
+    
+    private let noWorkoutImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "noWorkout")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        return imageView
     }()
     
     private let calendarView = CalendarView()
@@ -98,12 +109,18 @@ class MainViewController: UIViewController {
         view.addSubview(weatherView)
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
+        view.addSubview(noWorkoutImageView)
     
     }
     
     @objc private func addWorkoutButtonTapped() {
-        print("addWorkoutButtonTapped pressed")
+        
+        let newWorkoutViewController = NewWorkoutViewController()
+        
+        present(newWorkoutViewController, animated: true, completion: nil)
     }
+    
+    
 
 }
 //MARK: - UITableViewDelegate
@@ -183,6 +200,13 @@ extension MainViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        ])
+        
+        NSLayoutConstraint.activate([
+            noWorkoutImageView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 0),
+            noWorkoutImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            noWorkoutImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            noWorkoutImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
         ])
     }
 }

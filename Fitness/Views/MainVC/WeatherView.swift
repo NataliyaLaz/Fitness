@@ -31,9 +31,10 @@ class WeatherView: UIView {
     private let weatherAdviceLabel: UILabel = {
         let label = UILabel()
         label.text = "The best time to have training outdoors. Finish your day with running"
-        label.font = .robotoMedium12()
+        label.font = .robotoMedium14()
         label.textColor = .specialLightBrown
         label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,22 +64,23 @@ class WeatherView: UIView {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            weatherImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            weatherImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             weatherImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10 ),
-            weatherImageView.heightAnchor.constraint(equalToConstant: 63),
-            weatherImageView.widthAnchor.constraint(equalToConstant: 63)
+            weatherImageView.heightAnchor.constraint(equalToConstant: 60),
+            weatherImageView.widthAnchor.constraint(equalToConstant: 60)
         ])
         
         NSLayoutConstraint.activate([
             weatherStateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             weatherStateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            weatherStateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -78),
+            weatherStateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -75)
         ])
         
         NSLayoutConstraint.activate([
             weatherAdviceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 35),
             weatherAdviceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             weatherAdviceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -78),
+            weatherAdviceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
             
         ])
     }

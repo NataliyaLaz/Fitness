@@ -22,6 +22,7 @@
 		8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */; };
 		8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DA281E82C300E3B8F5 /* WeatherView.swift */; };
 		8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */; };
+		882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		8829C0DA281E82C300E3B8F5 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				880FB3FE2819BCBB002DB701 /* MainViewController.swift */,
+				882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */,
 				880FB3FB2819BCBB002DB701 /* AppDelegate.swift in Sources */,
 				8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */,
+				882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */,
 				880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */,
 				880FB3FD2819BCBB002DB701 /* SceneDelegate.swift in Sources */,
 			);
