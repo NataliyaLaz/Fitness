@@ -18,6 +18,8 @@
 		880FB41D2819C56E002DB701 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB41C2819C56E002DB701 /* UIColor + Extensions.swift */; };
 		880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB41E2819C5C8002DB701 /* UIView + Extensions.swift */; };
 		880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */; };
+		8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB9428266CC20078008E /* DateAndRepeatView.swift */; };
+		8819EB97282695420078008E /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB96282695420078008E /* RepsOrTimerView.swift */; };
 		8826BB60281D546800C82AFC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB5F281D546800C82AFC /* CalendarView.swift */; };
 		8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */; };
 		8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DA281E82C300E3B8F5 /* WeatherView.swift */; };
@@ -39,6 +41,8 @@
 		880FB41C2819C56E002DB701 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		880FB41E2819C5C8002DB701 /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
+		8819EB9428266CC20078008E /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
+		8819EB96282695420078008E /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
 		8826BB5F281D546800C82AFC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		8829C0DA281E82C300E3B8F5 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				8826BB5E281D542100C82AFC /* MainVC */,
+				8819EB9328266C6F0078008E /* NewWorkoutVC */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +161,15 @@
 				880FB4162819C3EF002DB701 /* Roboto-Medium.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8819EB9328266C6F0078008E /* NewWorkoutVC */ = {
+			isa = PBXGroup;
+			children = (
+				8819EB9428266CC20078008E /* DateAndRepeatView.swift */,
+				8819EB96282695420078008E /* RepsOrTimerView.swift */,
+			);
+			path = NewWorkoutVC;
 			sourceTree = "<group>";
 		};
 		8826BB5E281D542100C82AFC /* MainVC */ = {
@@ -254,9 +268,11 @@
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
 				880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */,
 				8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */,
+				8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */,
 				880FB3FF2819BCBB002DB701 /* MainViewController.swift in Sources */,
 				8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */,
 				880FB3FB2819BCBB002DB701 /* AppDelegate.swift in Sources */,
+				8819EB97282695420078008E /* RepsOrTimerView.swift in Sources */,
 				8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */,
 				882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */,
 				880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */,

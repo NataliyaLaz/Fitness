@@ -79,6 +79,7 @@ class MainViewController: UIViewController {
     private let calendarView = CalendarView()
     private let weatherView = WeatherView()
     
+    
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
     
     override func viewDidLayoutSubviews() {
@@ -91,6 +92,10 @@ class MainViewController: UIViewController {
         setConstraints()
         setDelegates()
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
+    }
+    
+    deinit {
+        print ("MainViewController was deinited")
     }
     
     private func setDelegates() {
