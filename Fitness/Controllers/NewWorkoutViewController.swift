@@ -9,6 +9,13 @@ import UIKit
 
 class NewWorkoutViewController: UIViewController{
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.bounces = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     private let newWorkoutLabel: UILabel = {
         let label = UILabel()
         label.text = "NEW WORKOUT"
@@ -27,14 +34,7 @@ class NewWorkoutViewController: UIViewController{
         return button
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Name"
-        label.textColor = .specialLightBrown
-        label.font = .robotoMedium14()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let nameLabel = UILabel(text: "Name")
     
     private let nameTextField: UITextField = {
         let textfield = UITextField()
@@ -50,23 +50,9 @@ class NewWorkoutViewController: UIViewController{
         return textfield
     }()
     
-    private let dateAndRepeatLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Date and repeat"
-        label.textColor = .specialLightBrown
-        label.font = .robotoMedium14()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let dateAndRepeatLabel = UILabel(text: "Date and repeat")
     
-    private let repsOrTimerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Reps or timer"
-        label.textColor = .specialLightBrown
-        label.font = .robotoMedium14()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let repsOrTimerLabel = UILabel(text: "Reps or timer")
     
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -92,7 +78,7 @@ class NewWorkoutViewController: UIViewController{
         setupViews()
         setConstraints()
         setDelegates()
-        
+        addTaps()
         
     }
     
@@ -104,16 +90,17 @@ class NewWorkoutViewController: UIViewController{
         
         view.backgroundColor = .specialBackground
         
-        view.addSubview(newWorkoutLabel)
-        view.addSubview(closeButton)
-        view.addSubview(nameLabel)
-        view.addSubview(nameTextField)
-        view.addSubview(dateAndRepeatLabel)
-        view.addSubview(dateAndRepeatView)
-        view.addSubview(repsOrTimerLabel)
-        view.addSubview(repsOrTimerView)
-        view.addSubview(saveButton)
+        view.addSubview(scrollView)
         
+        scrollView.addSubview(newWorkoutLabel)
+        scrollView.addSubview(closeButton)
+        scrollView.addSubview(nameLabel)
+        scrollView.addSubview(nameTextField)
+        scrollView.addSubview(dateAndRepeatLabel)
+        scrollView.addSubview(dateAndRepeatView)
+        scrollView.addSubview(repsOrTimerLabel)
+        scrollView.addSubview(repsOrTimerView)
+        scrollView.addSubview(saveButton)
     }
     
     private func setDelegates() {
@@ -127,13 +114,22 @@ class NewWorkoutViewController: UIViewController{
     @objc private func saveButtonTapped() {
         print("saveButtonTapped")
     }
+    
+    private func addTaps() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapScreen)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 //MARK: - UITextFieldDelegate
 extension NewWorkoutViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         nameTextField.resignFirstResponder()
     }
 }
@@ -146,8 +142,15 @@ extension NewWorkoutViewController {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            newWorkoutLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            newWorkoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ])
+        
+        NSLayoutConstraint.activate([
+            newWorkoutLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            newWorkoutLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -180,8 +183,8 @@ extension NewWorkoutViewController {
             dateAndRepeatView.topAnchor.constraint(equalTo: dateAndRepeatLabel.bottomAnchor, constant: 3),
             dateAndRepeatView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             dateAndRepeatView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            dateAndRepeatView.heightAnchor.constraint(equalToConstant: 94)
-            dateAndRepeatView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2)
+            //dateAndRepeatView.heightAnchor.constraint(equalToConstant: 94)
+            dateAndRepeatView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.24)
         ])
         
         NSLayoutConstraint.activate([
@@ -201,7 +204,8 @@ extension NewWorkoutViewController {
             saveButton.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.heightAnchor.constraint(equalToConstant: 55)
+            saveButton.heightAnchor.constraint(equalToConstant: 55),
+            saveButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
         ])
     }
         

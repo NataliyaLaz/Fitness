@@ -46,14 +46,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    private let workoutTodayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Workout today"
-        label.font = .robotoMedium14()
-        label.textColor = .specialLightBrown
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let workoutTodayLabel = UILabel(text: "Workout today")
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -121,6 +114,8 @@ class MainViewController: UIViewController {
     @objc private func addWorkoutButtonTapped() {
         
         let newWorkoutViewController = NewWorkoutViewController()
+        
+        newWorkoutViewController.modalPresentationStyle = .fullScreen
         
         present(newWorkoutViewController, animated: true, completion: nil)
     }

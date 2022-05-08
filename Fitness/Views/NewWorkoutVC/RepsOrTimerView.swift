@@ -38,14 +38,7 @@ class RepsOrTimerView: UIView {
         return slider
     }()
     
-    private let repeatOrTimerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Choose repeat or timer"
-        label.font = .robotoMedium14()
-        label.textColor = .specialLightBrown
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let repeatOrTimerLabel = UILabel(text: "Choose repeat or timer")
     
     private let repsLabel: UILabel = {
         let label = UILabel()
