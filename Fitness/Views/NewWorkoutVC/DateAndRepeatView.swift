@@ -18,7 +18,7 @@ class DateAndRepeatView: UIView {
         return label
     }()
     
-    private let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ class DateAndRepeatView: UIView {
         return label
     }()
     
-    private let repeatSwitch: UISwitch = {
+    let repeatSwitch: UISwitch = {
         let repeatSwitch = UISwitch()
         repeatSwitch.isOn = true
         repeatSwitch.onTintColor = .specialGreen

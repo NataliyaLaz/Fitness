@@ -74,8 +74,6 @@ class WorkoutTableViewCell: UITableViewCell {
         return button
     }()
     
-
-    
     var labelsStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -105,6 +103,23 @@ class WorkoutTableViewCell: UITableViewCell {
         @objc private func startButtonTapped() {
             print("StartButtonTapped pressed")
         }
+    
+    func cellConfigure(model: WorkoutModel) {
+        
+        workoutTitleLabel.text = model.workoutName
+        
+        let (min, sec) = { (secs: Int) -> (Int, Int) in
+            return ((secs / 60), (secs % 60))
+        }(model.workoutTimer)
+        
+        workoutRepsLabel.text = (model.workoutTimer == 0) ? "Reps: \(model.workoutReps)" : "Timer : \(min) min \(sec) sec"
+        workoutSetsLabel.text = "Sets: \(model.workoutSets)"
+        
+        guard let imageData = model.workoutImage else { return}
+        guard let image = UIImage(data: imageData) else { return}
+        
+        workoutImageView.image = image
+    }
     
     private func setConstraints() {
         

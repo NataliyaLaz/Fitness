@@ -11,25 +11,25 @@ class RepsOrTimerView: UIView {
     
     private let setsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Date"
+        label.text = "Sets"
         label.font = .robotoMedium18()
         label.textColor = .specialGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let numberOfSetLabel: UILabel = {
+    let numberOfSetLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
+        label.text = "0"
         label.font = .robotoMedium24()
         label.textColor = .specialGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let setsSlider: UISlider = {
+    let setsSlider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 20
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
@@ -49,18 +49,18 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let numberOfRepsLabel: UILabel = {
+    let numberOfRepsLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
+        label.text = "0"
         label.font = .robotoMedium24()
         label.textColor = .specialGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let repsSlider: UISlider = {
+    let repsSlider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 50
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
@@ -71,14 +71,14 @@ class RepsOrTimerView: UIView {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Reps"
+        label.text = "Timer"
         label.font = .robotoMedium18()
         label.textColor = .specialGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let numberOfTimerLabel: UILabel = {
+    let numberOfTimerLabel: UILabel = {
         let label = UILabel()
         label.text = "0 min"
         label.font = .robotoMedium24()
@@ -87,9 +87,9 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let timerSlider: UISlider = {
+     let timerSlider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 600
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen

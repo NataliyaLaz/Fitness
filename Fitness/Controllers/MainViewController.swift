@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -72,8 +73,10 @@ class MainViewController: UIViewController {
     private let calendarView = CalendarView()
     private let weatherView = WeatherView()
     
-    
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
+    
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>! = nil
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -84,7 +87,14 @@ class MainViewController: UIViewController {
         setupViews()
         setConstraints()
         setDelegates()
+        getWorkouts(date: Date())//Date() is todays date
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     deinit {
@@ -114,10 +124,29 @@ class MainViewController: UIViewController {
     @objc private func addWorkoutButtonTapped() {
         
         let newWorkoutViewController = NewWorkoutViewController()
-        
         newWorkoutViewController.modalPresentationStyle = .fullScreen
-        
         present(newWorkoutViewController, animated: true, completion: nil)
+    }
+    
+    private func getWorkouts(date: Date) {
+
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.weekday], from: date)
+        guard let weekday = components.weekday else { return}//2 if Monday
+        
+        let dateStart = date
+        let dateEnd:Date = {
+            let components = DateComponents(day: 1, second: -1)//23.59
+            return calendar.date(byAdding: components, to: dateStart) ?? Date()
+        }()
+        
+        let predicateRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekday) AND workoutRepeat = true")
+        let predicateUnrepeat = NSPredicate(format: "workoutRepeat = false AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+        let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat, predicateUnrepeat])
+        
+        workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
+        tableView.reloadData()
+        
     }
     
     
@@ -139,11 +168,13 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        workoutArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
+        let model = workoutArray[indexPath.row]
+        cell.cellConfigure(model: model)
         return cell
     }
     
