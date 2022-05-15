@@ -1,0 +1,121 @@
+//
+//  StartWorkoutViewController.swift
+//  Fitness
+//
+//  Created by Nataliya Lazouskaya on 15.05.22.
+//
+
+import Foundation
+import UIKit
+
+class StartWorkoutViewController:UIViewController {
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.bounces = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private let startWorkoutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "START WORKOUT"
+        label.textColor = .specialGray
+        label.font = .robotoMedium24()
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let sportsmenImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "sportsmen")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let detailsLabel = UILabel(text: "Details")
+    
+    private let exerciseView = ExerciseView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setConstraints()
+    }
+    
+    private func setupViews() {
+        
+        view.backgroundColor = .specialBackground
+        
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(startWorkoutLabel)
+        scrollView.addSubview(closeButton)
+        scrollView.addSubview(sportsmenImageView)
+        scrollView.addSubview(detailsLabel)
+        scrollView.addSubview(exerciseView)
+    }
+    
+    @objc private func closeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: - SetConstraints
+
+extension StartWorkoutViewController {
+    
+    func setConstraints(){
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ])
+        
+        NSLayoutConstraint.activate([
+            startWorkoutLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            startWorkoutLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            closeButton.centerYAnchor.constraint(equalTo: startWorkoutLabel.centerYAnchor),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            sportsmenImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 28),
+            sportsmenImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            sportsmenImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            sportsmenImageView.heightAnchor.constraint(equalToConstant: 250)
+        ])
+        
+        NSLayoutConstraint.activate([
+            detailsLabel.topAnchor.constraint(equalTo: sportsmenImageView.bottomAnchor, constant: 26),
+            detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            detailsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            exerciseView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 3),
+            exerciseView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            exerciseView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            exerciseView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1)
+        ])
+    }
+    
+}
