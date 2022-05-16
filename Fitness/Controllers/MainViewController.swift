@@ -31,16 +31,22 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    private let addWorkoutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .specialYellow
-        button.layer.cornerRadius = 10
-        button.setTitle("Add workout", for: .normal)
-        button.titleLabel?.font = .robotoMedium12()
-        button.tintColor = .specialDarkGreen
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 15, right: 0)
-        button.titleEdgeInsets = UIEdgeInsets(top: 50, left: -40, bottom: 0, right: 0)
-        button.setImage(UIImage(named: "addWorkout"), for: .normal)
+    private lazy var addWorkoutButton: UIButton = {
+        
+        var configuration = UIButton.Configuration.filled() // 1
+        configuration.cornerStyle = .dynamic // 2
+        configuration.baseForegroundColor = .specialDarkGreen
+        configuration.baseBackgroundColor = .specialYellow
+        configuration.buttonSize = .large
+        configuration.title = "Add workout"
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 2, bottom: 2, trailing: 2)
+        configuration.imagePadding = 8
+        configuration.attributedTitle?.font = .robotoMedium12()
+        configuration.image = UIImage(named: "addWorkout")
+        configuration.imagePlacement = .top
+
+        let button = UIButton(configuration: configuration, primaryAction: nil)
+        
         button.addTarget(self, action: #selector(addWorkoutButtonTapped), for: .touchUpInside)
         button.addShadowOnView()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -131,10 +137,16 @@ class MainViewController: UIViewController {
     private func getWorkouts(date: Date) {
 
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.weekday], from: date)
-        guard let weekday = components.weekday else { return}//2 if Monday
+        let formatter = DateFormatter()
+        let components = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
+        guard let weekday = components.weekday else { return}//2 if Monday (1 Sunday)
+        guard let day = components.day else { return}
+        guard let month = components.month else { return}
+        guard let year = components.year else { return}
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
         
-        let dateStart = date
+        guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return}
         let dateEnd:Date = {
             let components = DateComponents(day: 1, second: -1)//23.59
             return calendar.date(byAdding: components, to: dateStart) ?? Date()
@@ -148,9 +160,24 @@ class MainViewController: UIViewController {
         tableView.reloadData()
         
     }
-    
-    
+}
 
+//MARK: -
+
+extension MainViewController: StartWorkoutProtocol{
+    
+    func startButtonTapped(model: WorkoutModel) {
+        
+        if model.workoutTimer == 0 {
+            let startWorkoutViewController = StartWorkoutViewController()
+            startWorkoutViewController.modalPresentationStyle = .fullScreen
+            present(startWorkoutViewController, animated: true, completion: nil)
+        } else {
+            print("TimerVC")
+        }
+        
+    }
+    
 }
 //MARK: - UITableViewDelegate
 
@@ -175,6 +202,7 @@ extension MainViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
         let model = workoutArray[indexPath.row]
         cell.cellConfigure(model: model)
+        cell.cellStartWorkoutDelegate = self
         return cell
     }
     

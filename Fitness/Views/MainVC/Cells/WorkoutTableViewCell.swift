@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol StartWorkoutProtocol: AnyObject {
+    func startButtonTapped(model: WorkoutModel)
+}
+
 class WorkoutTableViewCell: UITableViewCell {
     
     private let backgroundCell:UIView = {
@@ -61,7 +65,7 @@ class WorkoutTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialYellow
         button.layer.cornerRadius = 10
@@ -75,6 +79,10 @@ class WorkoutTableViewCell: UITableViewCell {
     }()
     
     var labelsStackView = UIStackView()
+    
+    var workoutModel = WorkoutModel()
+    
+    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,10 +109,7 @@ class WorkoutTableViewCell: UITableViewCell {
     }
     
         @objc private func startButtonTapped() {
-            print("StartButtonTapped pressed")
-//            let startWorkoutViewController = StartWorkoutViewController()
-//            startWorkoutViewController.modalPresentationStyle = .fullScreen
-//            present(startWorkoutViewController, animated: true, completion: nil)
+            cellStartWorkoutDelegate?.startButtonTapped(model: workoutModel)
         }
     
     func cellConfigure(model: WorkoutModel) {

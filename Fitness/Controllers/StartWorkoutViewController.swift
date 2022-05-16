@@ -27,7 +27,7 @@ class StartWorkoutViewController:UIViewController {
         return label
     }()
     
-    private let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +47,7 @@ class StartWorkoutViewController:UIViewController {
     
     private let exerciseView = ExerciseView()
     
-    private let finishButton: UIButton = {
+    private lazy var finishButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialGreen
         button.setTitle("FINISH", for: .normal)
@@ -58,6 +58,8 @@ class StartWorkoutViewController:UIViewController {
         button.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    var workoutModel = WorkoutModel()
     
     override func viewDidLayoutSubviews() {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2

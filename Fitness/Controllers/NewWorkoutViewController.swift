@@ -27,7 +27,7 @@ class NewWorkoutViewController: UIViewController{
         return label
     }()
     
-    private let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ class NewWorkoutViewController: UIViewController{
     
     private let repsOrTimerLabel = UILabel(text: "Reps or timer")
     
-    private let saveButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialGreen
         button.setTitle("SAVE", for: .normal)

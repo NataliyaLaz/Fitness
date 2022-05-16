@@ -75,7 +75,7 @@ class ExerciseView: UIView {
         return view
     }()
     
-    private let editingButton: UIButton = {
+    private lazy var editingButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Editing", for: .normal)
         button.titleLabel?.font = .robotoMedium16()
@@ -86,7 +86,7 @@ class ExerciseView: UIView {
         return button
     }()
     
-    private let nextSetButton: UIButton = {
+    private lazy var nextSetButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialYellow
         button.setTitle("NEXT SET", for: .normal)
