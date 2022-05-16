@@ -47,6 +47,22 @@ class StartWorkoutViewController:UIViewController {
     
     private let exerciseView = ExerciseView()
     
+    private let finishButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .specialGreen
+        button.setTitle("FINISH", for: .normal)
+        button.titleLabel?.font = .robotoBold16()
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLayoutSubviews() {
+        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -54,7 +70,6 @@ class StartWorkoutViewController:UIViewController {
     }
     
     private func setupViews() {
-        
         view.backgroundColor = .specialBackground
         
         view.addSubview(scrollView)
@@ -64,12 +79,16 @@ class StartWorkoutViewController:UIViewController {
         scrollView.addSubview(sportsmenImageView)
         scrollView.addSubview(detailsLabel)
         scrollView.addSubview(exerciseView)
+        scrollView.addSubview(finishButton)
     }
     
     @objc private func closeButtonTapped() {
-        dismiss(animated: true, completion: nil)
+       dismiss(animated: true, completion: nil)
     }
     
+    @objc private func finishButtonTapped() {
+      print("Finish button pressed")
+    }
 }
 
 //MARK: - SetConstraints
@@ -98,23 +117,30 @@ extension StartWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            sportsmenImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 28),
-            sportsmenImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            sportsmenImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            sportsmenImageView.heightAnchor.constraint(equalToConstant: 250)
+            sportsmenImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
+            sportsmenImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            sportsmenImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            sportsmenImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
         
         NSLayoutConstraint.activate([
-            detailsLabel.topAnchor.constraint(equalTo: sportsmenImageView.bottomAnchor, constant: 26),
-            detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            detailsLabel.topAnchor.constraint(equalTo: sportsmenImageView.bottomAnchor, constant: 20),
+            detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             detailsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            exerciseView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 3),
+            exerciseView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
             exerciseView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             exerciseView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            exerciseView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1)
+            exerciseView.heightAnchor.constraint(equalToConstant: 230)
+        ])
+        
+        NSLayoutConstraint.activate([
+            finishButton.topAnchor.constraint(equalTo: exerciseView.bottomAnchor, constant: 20),
+            finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            finishButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }
     

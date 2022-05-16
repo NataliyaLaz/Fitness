@@ -102,6 +102,9 @@ class WorkoutTableViewCell: UITableViewCell {
     
         @objc private func startButtonTapped() {
             print("StartButtonTapped pressed")
+//            let startWorkoutViewController = StartWorkoutViewController()
+//            startWorkoutViewController.modalPresentationStyle = .fullScreen
+//            present(startWorkoutViewController, animated: true, completion: nil)
         }
     
     func cellConfigure(model: WorkoutModel) {
