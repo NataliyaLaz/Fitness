@@ -175,11 +175,12 @@ extension MainViewController: StartWorkoutProtocol{
             startWorkoutViewController.workoutModel = model
             present(startWorkoutViewController, animated: true)
         } else {
-            print("timerVC")
+            let timerViewController = TimerViewController()
+            timerViewController.modalPresentationStyle = .fullScreen
+            timerViewController.workoutModel = model
+            present(timerViewController, animated: true)
         }
-        
     }
-    
 }
 //MARK: - UITableViewDelegate
 
