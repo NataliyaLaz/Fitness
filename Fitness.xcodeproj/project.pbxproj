@@ -31,6 +31,7 @@
 		8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */; };
 		8881472D2827D70700D2BDC2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472C2827D70700D2BDC2 /* ProfileViewController.swift */; };
 		8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */; };
+		88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */; };
 		88CA6E2828290F6B00961DF9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA6E2728290F6B00961DF9 /* Realm */; };
 		88CA6E2A28290F6B00961DF9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA6E2928290F6B00961DF9 /* RealmSwift */; };
 		88CA6E2C2829115800961DF9 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E2B2829115800961DF9 /* WorkoutModel.swift */; };
@@ -65,6 +66,7 @@
 		8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		8881472C2827D70700D2BDC2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
+		88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkCancelAlert.swift; sourceTree = "<group>"; };
 		88CA6E2B2829115800961DF9 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		88CA6E2E2829317A00961DF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		88CA6E312829401200961DF9 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				88CA6E312829401200961DF9 /* SimpleAlert.swift */,
+				88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */,
 				88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */,
 				880FB3FD2819BCBB002DB701 /* SceneDelegate.swift in Sources */,
+				88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */,
 				8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,8 +33,8 @@ class MainViewController: UIViewController {
     
     private lazy var addWorkoutButton: UIButton = {
         
-        var configuration = UIButton.Configuration.filled() // 1
-        configuration.cornerStyle = .dynamic // 2
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .dynamic
         configuration.baseForegroundColor = .specialDarkGreen
         configuration.baseBackgroundColor = .specialYellow
         configuration.buttonSize = .large
@@ -82,7 +82,7 @@ class MainViewController: UIViewController {
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
     
     private let localRealm = try! Realm()
-    private var workoutArray: Results<WorkoutModel>! = nil
+    private var workoutArray: Results<WorkoutModel>!
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -90,6 +90,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
         setConstraints()
         setDelegates()
@@ -110,6 +111,7 @@ class MainViewController: UIViewController {
     private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        calendarView.cellCollectionViewDelegate = self
     }
 
     private func setupViews() {
@@ -124,7 +126,6 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         view.addSubview(noWorkoutImageView)
-    
     }
     
     @objc private func addWorkoutButtonTapped() {
@@ -162,7 +163,7 @@ class MainViewController: UIViewController {
     }
 }
 
-//MARK: -
+//MARK: - StartWorkoutProtocol
 
 extension MainViewController: StartWorkoutProtocol{
     
@@ -171,9 +172,10 @@ extension MainViewController: StartWorkoutProtocol{
         if model.workoutTimer == 0 {
             let startWorkoutViewController = StartWorkoutViewController()
             startWorkoutViewController.modalPresentationStyle = .fullScreen
-            present(startWorkoutViewController, animated: true, completion: nil)
+            startWorkoutViewController.workoutModel = model
+            present(startWorkoutViewController, animated: true)
         } else {
-            print("TimerVC")
+            print("timerVC")
         }
         
     }
@@ -187,8 +189,31 @@ extension MainViewController: UITableViewDelegate {
         100
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.workoutArray[indexPath.row]
+            RealmManager.shared.deleteWorkoutModel(model: deleteModel)
+            tableView.reloadData()
+        }
+        
+        action.backgroundColor = .specialBackground
+        action.image = UIImage(named: "delete")
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
+//MARK: - SelectCollectionViewItemProtocol
+
+extension MainViewController: SelectCollectionViewItemProtocol {
+    
+    func selectItem(date: Date) {
+        getWorkouts(date: date)
+    }
+    
+    
+}
 
 //MARK: - UITableViewDataSource
 
@@ -205,7 +230,6 @@ extension MainViewController: UITableViewDataSource {
         cell.cellStartWorkoutDelegate = self
         return cell
     }
-    
 }
 
 //MARK: - Set Constraints

@@ -67,11 +67,11 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .specialYellow
+//      button.backgroundColor = .specialYellow
         button.layer.cornerRadius = 10
         button.addShadowOnView()
-        button.setTitle("START", for: .normal)
-        button.setTitleColor(UIColor.specialDarkGreen, for: .normal)
+//        button.setTitle("START", for: .normal)
+//        button.setTitleColor(UIColor.specialDarkGreen, for: .normal)
         button.titleLabel?.font = .robotoBold16()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -82,7 +82,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     var workoutModel = WorkoutModel()
     
-    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
+    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?// we will work with protocol through this variable
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -114,6 +114,8 @@ class WorkoutTableViewCell: UITableViewCell {
     
     func cellConfigure(model: WorkoutModel) {
         
+        workoutModel = model// !!!
+        
         workoutTitleLabel.text = model.workoutName
         
         let (min, sec) = { (secs: Int) -> (Int, Int) in
@@ -127,6 +129,18 @@ class WorkoutTableViewCell: UITableViewCell {
         guard let image = UIImage(data: imageData) else { return}
         
         workoutImageView.image = image
+        
+        if model.status {
+            startButton.setTitle("COMPLETE", for: .normal)
+            startButton.tintColor = .white
+            startButton.backgroundColor = .specialGreen
+            startButton.isEnabled = false
+        } else {
+            startButton.setTitle("START", for: .normal)
+            startButton.tintColor = .specialDarkGreen
+            startButton.backgroundColor = .specialYellow
+            startButton.isEnabled = true
+        }
     }
     
     private func setConstraints() {

@@ -5,12 +5,15 @@
 //  Created by Nataliya Lazouskaya on 15.05.22.
 //
 
-import Foundation
 import UIKit
+
+protocol NextSetProtocol: AnyObject {
+    func nextSetTapped()
+}
 
 class ExerciseView: UIView {
     
-    private let exerciseNameLabel: UILabel = {
+    var exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
         label.font = .robotoMedium24()
@@ -30,7 +33,7 @@ class ExerciseView: UIView {
         return label
     }()
     
-    private let numberOfSetsLabel: UILabel = {
+    var numberOfSetsLabel: UILabel = {
         let label = UILabel()
         label.text = "1/4"
         label.font = .robotoMedium24()
@@ -48,7 +51,7 @@ class ExerciseView: UIView {
         return label
     }()
     
-    let numberOfRepsLabel: UILabel = {
+    var numberOfRepsLabel: UILabel = {
         let label = UILabel()
         label.text = "20"
         label.font = .robotoMedium24()
@@ -98,6 +101,8 @@ class ExerciseView: UIView {
         return button
     }()
     
+    weak var cellNextSetDelegate: NextSetProtocol?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -135,7 +140,7 @@ class ExerciseView: UIView {
     }
     
     @objc private func nextSetButtonTapped() {
-       print("NextSet button pressed")
+        cellNextSetDelegate?.nextSetTapped()
     }
     
     private func setConstraints() {

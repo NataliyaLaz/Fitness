@@ -30,7 +30,7 @@ class RepsOrTimerView: UIView {
     lazy var setsSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0
-        slider.maximumValue = 20
+        slider.maximumValue = 10
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
         slider.translatesAutoresizingMaskIntoConstraints = false

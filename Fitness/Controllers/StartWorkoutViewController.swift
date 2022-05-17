@@ -45,6 +45,8 @@ class StartWorkoutViewController:UIViewController {
     
     private let detailsLabel = UILabel(text: "Details")
     
+    private var numberOfSet = 1
+    
     private let exerciseView = ExerciseView()
     
     private lazy var finishButton: UIButton = {
@@ -67,8 +69,17 @@ class StartWorkoutViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
         setConstraints()
+        setWorkoutParameters()
+        setDelegates()
+        
+        print(workoutModel)
+    }
+    
+    private func setDelegates() {
+        exerciseView.cellNextSetDelegate = self
     }
     
     private func setupViews() {
@@ -85,11 +96,38 @@ class StartWorkoutViewController:UIViewController {
     }
     
     @objc private func closeButtonTapped() {
-       dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func finishButtonTapped() {
-      print("Finish button pressed")
+        if numberOfSet == workoutModel.workoutSets {
+            dismiss(animated: true, completion: nil)
+            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
+        } else {
+            alertOkCancel(title: "Warning", message: "You haven't finished your workout yet") {
+                self.dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func setWorkoutParameters() {
+        exerciseView.exerciseNameLabel.text = workoutModel.workoutName
+        exerciseView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+        exerciseView.numberOfRepsLabel.text = "\(workoutModel.workoutReps)"
+    }
+}
+
+//MARK: - NextSetProtocol
+
+extension StartWorkoutViewController: NextSetProtocol{
+    
+    func nextSetTapped() {
+        if numberOfSet < workoutModel.workoutSets {
+            numberOfSet += 1
+            exerciseView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+        } else {
+            alertOK(title: "Hey", message: "You've finished your workout")
+        }
     }
 }
 

@@ -82,11 +82,11 @@ class NewWorkoutViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
         setConstraints()
         setDelegates()
         addTaps()
-        
     }
     
     deinit {
@@ -146,7 +146,7 @@ class NewWorkoutViewController: UIViewController{
         guard let weekday = components.weekday else { return}
         workoutModel.workoutNumberOfDay = weekday
         
-        workoutModel.workoutRepeat = dateAndRepeatView.repeatSwitch.isOn
+        workoutModel.workoutRepeat = (dateAndRepeatView.repeatSwitch.isOn)
         
         workoutModel.workoutSets = Int(repsOrTimerView.setsSlider.value)
         workoutModel.workoutReps = Int(repsOrTimerView.repsSlider.value)
