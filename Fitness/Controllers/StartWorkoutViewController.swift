@@ -62,6 +62,7 @@ class StartWorkoutViewController:UIViewController {
     }()
     
     var workoutModel = WorkoutModel()
+    let customAlert = CustomAlert()
     
     override func viewDidLayoutSubviews() {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
@@ -120,6 +121,12 @@ class StartWorkoutViewController:UIViewController {
 //MARK: - NextSetProtocol
 
 extension StartWorkoutViewController: NextSetProtocol{
+   
+    func editingTapped() {
+        customAlert.alertCustom(viewController: self) { _, _ in
+            print("1")
+        }
+    }
     
     func nextSetTapped() {
         if numberOfSet < workoutModel.workoutSets {

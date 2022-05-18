@@ -20,6 +20,8 @@
 		880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */; };
 		8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB9428266CC20078008E /* DateAndRepeatView.swift */; };
 		8819EB97282695420078008E /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB96282695420078008E /* RepsOrTimerView.swift */; };
+		882465C42834FB000090EC45 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882465C32834FB000090EC45 /* Date + Extension.swift */; };
+		882465C6283517BB0090EC45 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882465C5283517BB0090EC45 /* CustomAlert.swift */; };
 		8826BB60281D546800C82AFC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB5F281D546800C82AFC /* CalendarView.swift */; };
 		8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */; };
 		882901B328312B1200A5CAE4 /* StartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882901B228312B1200A5CAE4 /* StartWorkoutViewController.swift */; };
@@ -57,6 +59,8 @@
 		880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		8819EB9428266CC20078008E /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
 		8819EB96282695420078008E /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
+		882465C32834FB000090EC45 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		882465C5283517BB0090EC45 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		8826BB5F281D546800C82AFC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		882901B228312B1200A5CAE4 /* StartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				880FB4132819C323002DB701 /* UIKit */,
+				882465C32834FB000090EC45 /* Date + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 			children = (
 				88CA6E312829401200961DF9 /* SimpleAlert.swift */,
 				88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */,
+				882465C5283517BB0090EC45 /* CustomAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 			files = (
 				88B8F4D22833E02B006EF1CB /* TimerViewController.swift in Sources */,
 				880FB41B2819C537002DB701 /* UIFont + Extensions.swift in Sources */,
+				882465C42834FB000090EC45 /* Date + Extension.swift in Sources */,
 				880FB41D2819C56E002DB701 /* UIColor + Extensions.swift in Sources */,
 				888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */,
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
@@ -368,6 +375,7 @@
 				880FB3FD2819BCBB002DB701 /* SceneDelegate.swift in Sources */,
 				88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */,
 				8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */,
+				882465C6283517BB0090EC45 /* CustomAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

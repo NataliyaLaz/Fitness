@@ -114,7 +114,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     func cellConfigure(model: WorkoutModel) {
         
-        workoutModel = model// !!!
+        workoutModel = model// !!! initially our workoutModel is empty and we need to fill it
         
         workoutTitleLabel.text = model.workoutName
         
