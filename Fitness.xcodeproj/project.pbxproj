@@ -41,6 +41,7 @@
 		88CA6E2C2829115800961DF9 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E2B2829115800961DF9 /* WorkoutModel.swift */; };
 		88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E2E2829317A00961DF9 /* RealmManager.swift */; };
 		88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E312829401200961DF9 /* SimpleAlert.swift */; };
+		88EB271528365C1F008A7A14 /* ExercisesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EB271428365C1F008A7A14 /* ExercisesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		88CA6E2B2829115800961DF9 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		88CA6E2E2829317A00961DF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		88CA6E312829401200961DF9 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		88EB271428365C1F008A7A14 /* ExercisesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				8819EB9328266C6F0078008E /* NewWorkoutVC */,
 				882901B4283130A700A5CAE4 /* StartWorkoutVC */,
 				88B8F4D32833E23F006EF1CB /* TimerVC */,
+				88EB271228365BDF008A7A14 /* StatisticVC */,
 				88CA6E3028293F7B00961DF9 /* Alerts */,
 			);
 			path = Views;
@@ -269,6 +272,22 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		88EB271228365BDF008A7A14 /* StatisticVC */ = {
+			isa = PBXGroup;
+			children = (
+				88EB271328365BFA008A7A14 /* Cells */,
+			);
+			path = StatisticVC;
+			sourceTree = "<group>";
+		};
+		88EB271328365BFA008A7A14 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				88EB271428365C1F008A7A14 /* ExercisesTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -360,6 +379,7 @@
 				8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */,
 				88CA6E2C2829115800961DF9 /* WorkoutModel.swift in Sources */,
 				8881472D2827D70700D2BDC2 /* ProfileViewController.swift in Sources */,
+				88EB271528365C1F008A7A14 /* ExercisesTableViewCell.swift in Sources */,
 				880FB3FF2819BCBB002DB701 /* MainViewController.swift in Sources */,
 				8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */,
 				880FB3FB2819BCBB002DB701 /* AppDelegate.swift in Sources */,
