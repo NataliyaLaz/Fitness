@@ -112,7 +112,7 @@ class TimerViewController: UIViewController {
     @objc private func finishButtonTapped() {
         if numberOfSet == workoutModel.workoutSets {
             dismiss(animated: true, completion: nil)
-            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: workoutModel, bool: true)
         } else {
             alertOkCancel(title: "Warning", message: "You haven't finished your workout yet") {
                 self.dismiss(animated: true)

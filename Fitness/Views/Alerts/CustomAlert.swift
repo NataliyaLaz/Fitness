@@ -24,6 +24,10 @@ class CustomAlert {
     }()
     
     private var mainView: UIView?
+    private let setsTextField = UITextField()
+    private let repsTextField = UITextField()
+    
+    var buttonAction: ((String, String) -> Void)?
     
     func alertCustom(viewController: UIViewController, completion: @escaping (String, String) -> Void) {// @escaping отрабатывает после вызова
         
@@ -65,10 +69,10 @@ class CustomAlert {
                                  height: 20)
         alertView.addSubview(setsLabel)
         
-        let setsTextField = UITextField(frame: CGRect(x: 20,
-                                                      y: setsLabel.frame.maxY,
-                                                      width: alertView.frame.width - 40,
-                                                      height: 30))
+        setsTextField.frame = CGRect(x: 20,
+                                     y: setsLabel.frame.maxY,
+                                     width: alertView.frame.width - 40,
+                                     height: 30)
         setsTextField.backgroundColor = .specialBrown
         setsTextField.layer.cornerRadius = 10
         setsTextField.textColor = .specialGray
@@ -88,10 +92,10 @@ class CustomAlert {
                                  height: 20)
         alertView.addSubview(repsLabel)
         
-        let repsTextField = UITextField(frame: CGRect(x: 20,
-                                                      y: repsLabel.frame.maxY,
-                                                      width: alertView.frame.width - 40,
-                                                      height: 30))
+        repsTextField.frame = CGRect(x: 20,
+                                     y: repsLabel.frame.maxY,
+                                     width: alertView.frame.width - 40,
+                                     height: 30)
         repsTextField.backgroundColor = .specialBrown
         repsTextField.layer.cornerRadius = 10
         repsTextField.textColor = .specialGray
@@ -115,9 +119,11 @@ class CustomAlert {
         okButton.addTarget(self, action: #selector(dismissAlert), for: .touchUpInside)
         alertView.addSubview(okButton)
         
+        buttonAction = completion
+        
         UIView.animate(withDuration: 0.3) {
             self.backgroundView.alpha = 0.6
-        } completion: { done in
+        } completion: { done in// you can even write your name where "done" it means true
             if done {
                 UIView.animate(withDuration: 0.3) {
                     self.alertView.center = parentView.center
@@ -127,6 +133,29 @@ class CustomAlert {
     }
     
     @objc private func dismissAlert() {
-        print("OK pressed")
+        
+        guard let setsNumber = setsTextField.text else { return }
+        guard let repsNumber = repsTextField.text else { return }
+        buttonAction?(setsNumber, repsNumber)
+        
+        guard let targetView = mainView else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.alertView.frame = CGRect(x: 40,
+                                          y: targetView.frame.height,
+                                          width: targetView.frame.width - 80,
+                                          height: 420)
+        } completion: { done in
+            if done {
+                UIView.animate(withDuration: 0.3) {
+                    self.backgroundView.alpha = 0
+                } completion: { done in
+                    if done {
+                        self.alertView.removeFromSuperview()
+                        self.backgroundView.removeFromSuperview()
+                    }
+                }
+            }
+        }
     }
 }

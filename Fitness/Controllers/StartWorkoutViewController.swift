@@ -5,7 +5,6 @@
 //  Created by Nataliya Lazouskaya on 15.05.22.
 //
 
-import Foundation
 import UIKit
 
 class StartWorkoutViewController:UIViewController {
@@ -103,7 +102,7 @@ class StartWorkoutViewController:UIViewController {
     @objc private func finishButtonTapped() {
         if numberOfSet == workoutModel.workoutSets {
             dismiss(animated: true, completion: nil)
-            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: workoutModel, bool: true)
         } else {
             alertOkCancel(title: "Warning", message: "You haven't finished your workout yet") {
                 self.dismiss(animated: true)
@@ -123,8 +122,12 @@ class StartWorkoutViewController:UIViewController {
 extension StartWorkoutViewController: NextSetProtocol{
    
     func editingTapped() {
-        customAlert.alertCustom(viewController: self) { _, _ in
-            print("1")
+        customAlert.alertCustom(viewController: self) { [self] sets, reps in//?
+            self.exerciseView.numberOfSetsLabel.text = "\(numberOfSet)/\(sets)"
+            self.exerciseView.numberOfRepsLabel.text = reps
+            guard let numberOfSets = Int(sets) else { return }
+            guard let numberOfReps = Int(reps) else { return }
+            RealmManager.shared.updateSetsRepsWorkoutModel(model: workoutModel, sets: numberOfSets, reps: numberOfReps)
         }
     }
     
