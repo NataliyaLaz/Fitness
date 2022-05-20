@@ -1,13 +1,13 @@
 //
-//  TimerViewController.swift
+//  StartWorkoutViewController.swift
 //  Fitness
 //
-//  Created by Nataliya Lazouskaya on 17.05.22.
+//  Created by Nataliya Lazouskaya on 15.05.22.
 //
 
 import UIKit
 
-class TimerViewController: UIViewController {
+class RepsWorkoutViewController:UIViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -34,29 +34,19 @@ class TimerViewController: UIViewController {
         return button
     }()
     
-    private let circleImageView: UIImageView = {
+    private let sportsmenImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "circle")
+        imageView.image = UIImage(named: "sportsmen")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-    }()
-    
-    private let mainTimerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "01:30"
-        label.textColor = .specialGray
-        label.font = .robotoBold45()
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
     
     private let detailsLabel = UILabel(text: "Details")
     
     private var numberOfSet = 1
     
-    private let exerciseTimerView = ExerciseTimerView()
+    private let exerciseView = ExerciseView()
     
     private lazy var finishButton: UIButton = {
         let button = UIButton(type: .system)
@@ -71,6 +61,7 @@ class TimerViewController: UIViewController {
     }()
     
     var workoutModel = WorkoutModel()
+    let customAlert = CustomAlert()
     
     override func viewDidLayoutSubviews() {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
@@ -88,7 +79,7 @@ class TimerViewController: UIViewController {
     }
     
     private func setDelegates() {
-        exerciseTimerView.cellNextSetTimerDelegate = self
+        exerciseView.cellNextSetDelegate = self
     }
     
     private func setupViews() {
@@ -98,10 +89,9 @@ class TimerViewController: UIViewController {
         
         scrollView.addSubview(startWorkoutLabel)
         scrollView.addSubview(closeButton)
-        scrollView.addSubview(circleImageView)
-        scrollView.addSubview(mainTimerLabel)
+        scrollView.addSubview(sportsmenImageView)
         scrollView.addSubview(detailsLabel)
-        scrollView.addSubview(exerciseTimerView)
+        scrollView.addSubview(exerciseView)
         scrollView.addSubview(finishButton)
     }
     
@@ -121,24 +111,32 @@ class TimerViewController: UIViewController {
     }
     
     private func setWorkoutParameters() {
-        exerciseTimerView.exerciseNameLabel.text = workoutModel.workoutName
-        exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
-        let (min, sec) = { (secs: Int) -> (Int, Int) in
-            return ((secs / 60), (secs % 60))
-        }(workoutModel.workoutTimer)
-        exerciseTimerView.timerLabel.text = "\(min) min \(sec) sec"
-        mainTimerLabel.text = "\(min) : \(sec)"
+        exerciseView.exerciseNameLabel.text = workoutModel.workoutName
+        exerciseView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+        exerciseView.numberOfRepsLabel.text = "\(workoutModel.workoutReps)"
     }
 }
 
-//MARK: - NextSetTimerProtocol
+//MARK: - NextSetProtocol
 
-extension TimerViewController: NextSetTimerProtocol{
+extension RepsWorkoutViewController: NextSetProtocol{
+   
+    func editingTapped() {
+        customAlert.alertCustom(viewController: self) { sets, reps in//?[self] before sets, reps
+            if sets != "" && reps != "" {
+            self.exerciseView.numberOfSetsLabel.text = "\(self.numberOfSet)/\(sets)"
+            self.exerciseView.numberOfRepsLabel.text = reps
+            guard let numberOfSets = Int(sets) else { return }
+            guard let numberOfReps = Int(reps) else { return }
+            RealmManager.shared.updateSetsRepsWorkoutModel(model: self.workoutModel, sets: numberOfSets, reps: numberOfReps)
+            }
+        }
+    }
     
     func nextSetTapped() {
         if numberOfSet < workoutModel.workoutSets {
             numberOfSet += 1
-            exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+            exerciseView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
         } else {
             alertOK(title: "Hey", message: "You've finished your workout")
         }
@@ -147,7 +145,7 @@ extension TimerViewController: NextSetTimerProtocol{
 
 //MARK: - SetConstraints
 
-extension TimerViewController {
+extension RepsWorkoutViewController {
     
     func setConstraints(){
         
@@ -171,34 +169,27 @@ extension TimerViewController {
         ])
         
         NSLayoutConstraint.activate([
-            circleImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
-            circleImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            circleImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            circleImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+            sportsmenImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
+            sportsmenImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            sportsmenImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            sportsmenImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
         
         NSLayoutConstraint.activate([
-            mainTimerLabel.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
-            mainTimerLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            mainTimerLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            mainTimerLabel.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
-        ])
-        
-        NSLayoutConstraint.activate([
-            detailsLabel.topAnchor.constraint(equalTo: circleImageView.bottomAnchor, constant: 20),
+            detailsLabel.topAnchor.constraint(equalTo: sportsmenImageView.bottomAnchor, constant: 20),
             detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             detailsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            exerciseTimerView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
-            exerciseTimerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            exerciseTimerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            exerciseTimerView.heightAnchor.constraint(equalToConstant: 230)
+            exerciseView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
+            exerciseView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            exerciseView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            exerciseView.heightAnchor.constraint(equalToConstant: 230)
         ])
         
         NSLayoutConstraint.activate([
-            finishButton.topAnchor.constraint(equalTo: exerciseTimerView.bottomAnchor, constant: 20),
+            finishButton.topAnchor.constraint(equalTo: exerciseView.bottomAnchor, constant: 20),
             finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             finishButton.heightAnchor.constraint(equalToConstant: 55)

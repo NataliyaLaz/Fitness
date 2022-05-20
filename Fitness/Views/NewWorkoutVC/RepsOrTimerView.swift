@@ -125,9 +125,11 @@ class RepsOrTimerView: UIView {
     
     @objc private func timerSliderChanged(sender: UISlider) {
         
-        let (min, sec) = { (secs: Int) -> (Int, Int) in
-            return ((secs / 60), (secs % 60))
-        }(Int(sender.value))
+//        let (min, sec) = { (secs: Int) -> (Int, Int) in
+//            return ((secs / 60), (secs % 60))
+//        }(Int(sender.value))
+        
+        let (min, sec) = Int(sender.value).convertSeconds()
       
         if sec != 0 && min != 0{
             numberOfTimerLabel.text = "\(min) min \(sec) sec"

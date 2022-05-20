@@ -24,17 +24,18 @@
 		882465C6283517BB0090EC45 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882465C5283517BB0090EC45 /* CustomAlert.swift */; };
 		8826BB60281D546800C82AFC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB5F281D546800C82AFC /* CalendarView.swift */; };
 		8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */; };
-		882901B328312B1200A5CAE4 /* StartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882901B228312B1200A5CAE4 /* StartWorkoutViewController.swift */; };
+		882901B328312B1200A5CAE4 /* RepsWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882901B228312B1200A5CAE4 /* RepsWorkoutViewController.swift */; };
 		882901B62831310300A5CAE4 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882901B52831310300A5CAE4 /* ExerciseView.swift */; };
 		8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DA281E82C300E3B8F5 /* WeatherView.swift */; };
 		8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */; };
 		882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */; };
+		886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886F14712837C5E900A6D22E /* Int + Extension.swift */; };
 		888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888147282827D39F00D2BDC2 /* MainTabBarController.swift */; };
 		8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */; };
 		8881472D2827D70700D2BDC2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472C2827D70700D2BDC2 /* ProfileViewController.swift */; };
 		8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */; };
 		88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */; };
-		88B8F4D22833E02B006EF1CB /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D12833E02B006EF1CB /* TimerViewController.swift */; };
+		88B8F4D22833E02B006EF1CB /* TimerWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */; };
 		88B8F4D52833E277006EF1CB /* ExerciseTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D42833E277006EF1CB /* ExerciseTimerView.swift */; };
 		88CA6E2828290F6B00961DF9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA6E2728290F6B00961DF9 /* Realm */; };
 		88CA6E2A28290F6B00961DF9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA6E2928290F6B00961DF9 /* RealmSwift */; };
@@ -64,17 +65,18 @@
 		882465C5283517BB0090EC45 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		8826BB5F281D546800C82AFC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8826BB61281D71CF00C82AFC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
-		882901B228312B1200A5CAE4 /* StartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutViewController.swift; sourceTree = "<group>"; };
+		882901B228312B1200A5CAE4 /* RepsWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsWorkoutViewController.swift; sourceTree = "<group>"; };
 		882901B52831310300A5CAE4 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		8829C0DA281E82C300E3B8F5 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
+		886F14712837C5E900A6D22E /* Int + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extension.swift"; sourceTree = "<group>"; };
 		888147282827D39F00D2BDC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		8881472C2827D70700D2BDC2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
 		88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkCancelAlert.swift; sourceTree = "<group>"; };
-		88B8F4D12833E02B006EF1CB /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWorkoutViewController.swift; sourceTree = "<group>"; };
 		88B8F4D42833E277006EF1CB /* ExerciseTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimerView.swift; sourceTree = "<group>"; };
 		88CA6E2B2829115800961DF9 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		88CA6E2E2829317A00961DF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -131,8 +133,8 @@
 				888147282827D39F00D2BDC2 /* MainTabBarController.swift */,
 				880FB3FE2819BCBB002DB701 /* MainViewController.swift */,
 				882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */,
-				882901B228312B1200A5CAE4 /* StartWorkoutViewController.swift */,
-				88B8F4D12833E02B006EF1CB /* TimerViewController.swift */,
+				882901B228312B1200A5CAE4 /* RepsWorkoutViewController.swift */,
+				88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */,
 				8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */,
 				8881472C2827D70700D2BDC2 /* ProfileViewController.swift */,
 			);
@@ -161,7 +163,7 @@
 			children = (
 				8826BB5E281D542100C82AFC /* MainVC */,
 				8819EB9328266C6F0078008E /* NewWorkoutVC */,
-				882901B4283130A700A5CAE4 /* StartWorkoutVC */,
+				882901B4283130A700A5CAE4 /* RepsWorkoutVC */,
 				88B8F4D32833E23F006EF1CB /* TimerVC */,
 				88EB271228365BDF008A7A14 /* StatisticVC */,
 				88CA6E3028293F7B00961DF9 /* Alerts */,
@@ -174,6 +176,7 @@
 			children = (
 				880FB4132819C323002DB701 /* UIKit */,
 				882465C32834FB000090EC45 /* Date + Extension.swift */,
+				886F14712837C5E900A6D22E /* Int + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,12 +241,12 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		882901B4283130A700A5CAE4 /* StartWorkoutVC */ = {
+		882901B4283130A700A5CAE4 /* RepsWorkoutVC */ = {
 			isa = PBXGroup;
 			children = (
 				882901B52831310300A5CAE4 /* ExerciseView.swift */,
 			);
-			path = StartWorkoutVC;
+			path = RepsWorkoutVC;
 			sourceTree = "<group>";
 		};
 		88B8F4D32833E23F006EF1CB /* TimerVC */ = {
@@ -367,13 +370,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88B8F4D22833E02B006EF1CB /* TimerViewController.swift in Sources */,
+				88B8F4D22833E02B006EF1CB /* TimerWorkoutViewController.swift in Sources */,
 				880FB41B2819C537002DB701 /* UIFont + Extensions.swift in Sources */,
 				882465C42834FB000090EC45 /* Date + Extension.swift in Sources */,
 				880FB41D2819C56E002DB701 /* UIColor + Extensions.swift in Sources */,
 				888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */,
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
 				882901B62831310300A5CAE4 /* ExerciseView.swift in Sources */,
+				886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */,
 				880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */,
 				8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */,
 				8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */,
@@ -387,7 +391,7 @@
 				8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */,
 				882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */,
 				8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */,
-				882901B328312B1200A5CAE4 /* StartWorkoutViewController.swift in Sources */,
+				882901B328312B1200A5CAE4 /* RepsWorkoutViewController.swift in Sources */,
 				880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */,
 				88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */,
 				88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */,

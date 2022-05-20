@@ -122,11 +122,13 @@ class ExerciseTimerView: UIView {
         addSubview(exerciseNameLabel)
         
         setsStackView = UIStackView(arrangedSubviews: [setsLabel, numberOfSetsLabel], axis: .horizontal, spacing: 10)
+        setsStackView.distribution = .equalSpacing
         
         addSubview(setsStackView)
         addSubview(setsLineView)
         
         timerStackView = UIStackView(arrangedSubviews: [timerOfSetLabel, timerLabel], axis: .horizontal, spacing: 10)
+        timerStackView.distribution = .equalSpacing
         
         addSubview(timerStackView)
         addSubview(timerLineView)
