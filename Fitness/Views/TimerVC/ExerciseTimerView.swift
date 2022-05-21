@@ -8,7 +8,8 @@
 import UIKit
 
 protocol NextSetTimerProtocol: AnyObject {
-    func nextSetTapped()
+    func nextSetTimerTapped()
+    func editingTimerTapped()
 }
 
 class ExerciseTimerView: UIView {
@@ -78,7 +79,7 @@ class ExerciseTimerView: UIView {
         return view
     }()
     
-    private lazy var editingButton: UIButton = {
+    lazy var editingButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Editing", for: .normal)
         button.titleLabel?.font = .robotoMedium16()
@@ -89,7 +90,7 @@ class ExerciseTimerView: UIView {
         return button
     }()
     
-    private lazy var nextSetButton: UIButton = {
+    lazy var nextSetButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialYellow
         button.setTitle("NEXT SET", for: .normal)
@@ -138,11 +139,11 @@ class ExerciseTimerView: UIView {
     }
     
     @objc private func editingButtonTapped() {
-       print("Editing button pressed")
+        cellNextSetTimerDelegate?.editingTimerTapped()
     }
     
     @objc private func nextSetButtonTapped() {
-        cellNextSetTimerDelegate?.nextSetTapped()
+        cellNextSetTimerDelegate?.nextSetTimerTapped()
     }
     
     private func setConstraints() {

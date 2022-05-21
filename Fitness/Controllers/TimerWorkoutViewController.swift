@@ -116,6 +116,7 @@ class TimerWorkoutViewController: UIViewController {
     
     @objc private func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
+        timer.invalidate()
     }
     
     @objc private func finishButtonTapped() {
@@ -127,6 +128,7 @@ class TimerWorkoutViewController: UIViewController {
                 self.dismiss(animated: true)
             }
         }
+        timer.invalidate()
     }
     
     private func setWorkoutParameters() {
@@ -138,13 +140,17 @@ class TimerWorkoutViewController: UIViewController {
         durationTimer = workoutModel.workoutTimer
     }
     
-    private func addTaps () {
+    private func addTaps() {
         let tapLabel = UITapGestureRecognizer(target: self, action: #selector(startTimer))
-        tapLabel.view?.isUserInteractionEnabled = true
-        view.addGestureRecognizer(tapLabel)
+        mainTimerLabel.isUserInteractionEnabled = true
+        mainTimerLabel.addGestureRecognizer(tapLabel)
     }
     
     @objc private func startTimer() {
+
+        exerciseTimerView.editingButton.isEnabled = false
+        exerciseTimerView.nextSetButton.isEnabled = false
+        mainTimerLabel.isUserInteractionEnabled = false
         
         if numberOfSet ==  workoutModel.workoutSets {
             alertOK(title: "Hey", message: "You've finished your workout")
@@ -159,19 +165,24 @@ class TimerWorkoutViewController: UIViewController {
     }
     
     @objc private func timerAction() {
-        durationTimer -= 1
-        print(durationTimer)
         
-        if durationTimer == 0 {
-            timer.invalidate()
-            durationTimer = workoutModel.workoutTimer
+            durationTimer -= 1
+            print(durationTimer)
             
-            numberOfSet += 1
-            exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
-        }
-        
-        let (min, sec) = durationTimer.convertSeconds()
-        mainTimerLabel.text = "\(min) : \(sec.setZeroForSeconds())"
+            if durationTimer == 0 {
+                timer.invalidate()
+                durationTimer = workoutModel.workoutTimer
+                
+                numberOfSet += 1
+                exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
+                
+                exerciseTimerView.editingButton.isEnabled = true
+                exerciseTimerView.nextSetButton.isEnabled = true
+                mainTimerLabel.isUserInteractionEnabled = true
+            }
+            
+            let (min, sec) = durationTimer.convertSeconds()
+            mainTimerLabel.text = "\(min) : \(sec.setZeroForSeconds())"
     }
 }
 
@@ -183,15 +194,15 @@ extension TimerWorkoutViewController{
         
         let center = CGPoint(x: circleImageView.frame.width / 2, y: circleImageView.frame.height / 2)
         
-        let startAngle = (CGFloat.pi / 2)
-        let endAngle = 2 * CGFloat.pi + startAngle
+        let endAngle = (-CGFloat.pi / 2)
+        let startAngle = 2 * CGFloat.pi + endAngle
         
-        let circularPath = UIBezierPath(arcCenter: center, radius: 135, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center, radius: 135, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
         shapeLayer.path = circularPath.cgPath
         shapeLayer.lineWidth = 21
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeEnd = 0//it will go to our end point
+        shapeLayer.strokeEnd = 1//it will go to our end point
         shapeLayer.lineCap = .round // round end of line
         shapeLayer.strokeColor = UIColor.specialGreen.cgColor
         circleImageView.layer.addSublayer(shapeLayer)
@@ -199,7 +210,7 @@ extension TimerWorkoutViewController{
     
     private func basicAnimation() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 1
+        basicAnimation.toValue = 0//full circle
         basicAnimation.duration = CFTimeInterval(durationTimer)
         basicAnimation.fillMode = .forwards
         basicAnimation.isRemovedOnCompletion = true
@@ -212,7 +223,22 @@ extension TimerWorkoutViewController{
 
 extension TimerWorkoutViewController: NextSetTimerProtocol{
     
-    func nextSetTapped() {
+    func editingTimerTapped() {
+        customAlert.alertCustom(viewController: self) { sets, timerOfSet in//?[self] before sets, reps
+            if sets != "" && timerOfSet != "" {
+                guard let numberOfSets = Int(sets) else { return }
+                guard let numberOfTimer = Int(timerOfSet) else { return }
+                let (min, sec) = numberOfTimer.convertSeconds()
+                self.exerciseTimerView.numberOfSetsLabel.text = "\(self.numberOfSet)/\(numberOfSets)"
+                self.exerciseTimerView.timerLabel.text = "\(min) min \(sec) sec"
+                self.mainTimerLabel.text = "\(min):\(sec.setZeroForSeconds())"
+                self.durationTimer = numberOfTimer
+                RealmManager.shared.updateSetsTimerWorkoutModel(model: self.workoutModel, sets: numberOfSets, timer: numberOfTimer)
+            }
+        }
+    }
+    
+    func nextSetTimerTapped() {
         if numberOfSet < workoutModel.workoutSets {
             numberOfSet += 1
             exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"

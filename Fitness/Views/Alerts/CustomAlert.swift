@@ -23,6 +23,8 @@ class CustomAlert {
         return view
     }()
     
+    private let scrollView = UIScrollView()
+    
     private var mainView: UIView?
     private let setsTextField = UITextField()
     private let repsTextField = UITextField()
@@ -34,14 +36,17 @@ class CustomAlert {
         guard let parentView = viewController.view else { return }
         mainView = parentView
         
+        scrollView.frame = parentView.frame
+        parentView.addSubview(scrollView)
+        
         backgroundView.frame = parentView.frame
-        parentView.addSubview(backgroundView)
+        scrollView.addSubview(backgroundView)
         
         alertView.frame = CGRect(x: 40,
                                  y: -420,
                                  width: parentView.frame.width - 80,
                                  height: 420)
-        parentView.addSubview(alertView)
+        scrollView.addSubview(alertView)
         
         let sportsmanImageView = UIImageView(frame: CGRect(x: (alertView.frame.width - alertView.frame.height * 0.4) / 2,
                                                            y: 30,
@@ -84,16 +89,16 @@ class CustomAlert {
         setsTextField.keyboardType = .numberPad
         alertView.addSubview(setsTextField)
         
-        let repsLabel = UILabel(text: "Reps")
-        repsLabel.translatesAutoresizingMaskIntoConstraints = true
-        repsLabel.frame = CGRect(x: 30,
+        let repsOrTimerLabel = UILabel(text: "Reps or Timer")
+        repsOrTimerLabel.translatesAutoresizingMaskIntoConstraints = true
+        repsOrTimerLabel.frame = CGRect(x: 30,
                                  y: setsTextField.frame.maxY + 3,
                                  width: alertView.frame.width - 60,
                                  height: 20)
-        alertView.addSubview(repsLabel)
+        alertView.addSubview(repsOrTimerLabel)
         
         repsTextField.frame = CGRect(x: 20,
-                                     y: repsLabel.frame.maxY,
+                                     y: repsOrTimerLabel.frame.maxY,
                                      width: alertView.frame.width - 40,
                                      height: 30)
         repsTextField.backgroundColor = .specialBrown
@@ -153,6 +158,9 @@ class CustomAlert {
                     if done {
                         self.alertView.removeFromSuperview()
                         self.backgroundView.removeFromSuperview()
+                        self.scrollView.removeFromSuperview()
+                        self.setsTextField.text = ""
+                        self.repsTextField.text = ""
                     }
                 }
             }
