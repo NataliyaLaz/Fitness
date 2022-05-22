@@ -224,7 +224,7 @@ extension TimerWorkoutViewController{
 extension TimerWorkoutViewController: NextSetTimerProtocol{
     
     func editingTimerTapped() {
-        customAlert.alertCustom(viewController: self) { sets, timerOfSet in//?[self] before sets, reps
+        customAlert.alertCustom(viewController: self, repsOrTimer: "Timer of Set") { sets, timerOfSet in//?[self] before sets, reps
             if sets != "" && timerOfSet != "" {
                 guard let numberOfSets = Int(sets) else { return }
                 guard let numberOfTimer = Int(timerOfSet) else { return }
