@@ -47,4 +47,23 @@ class RealmManager {
             model.workoutTimer = timer
         }
     }
+    
+ // User Model
+    
+    func saveUserModel(model: UserModel) {
+        try! localRealm.write{
+            localRealm.add(model)
+        }
+    }
+    
+    func updateUserModel(model: UserModel){
+        let users = localRealm.objects(UserModel.self)
+        try! localRealm.write{
+            users[0].firstName = model.firstName
+            users[0].secondName = model.secondName
+            users[0].height = model.height
+            users[0].weight = model.weight
+            users[0].target = model.target
+        }
+    }
 }

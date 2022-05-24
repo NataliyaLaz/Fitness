@@ -34,6 +34,7 @@
 		8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */; };
 		8881472D2827D70700D2BDC2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472C2827D70700D2BDC2 /* ProfileViewController.swift */; };
 		8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */; };
+		88AF45CD283A7643003E1673 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AF45CC283A7643003E1673 /* ProfileCollectionViewCell.swift */; };
 		88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */; };
 		88B8F4D22833E02B006EF1CB /* TimerWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */; };
 		88B8F4D52833E277006EF1CB /* ExerciseTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D42833E277006EF1CB /* ExerciseTimerView.swift */; };
@@ -42,6 +43,8 @@
 		88CA6E2C2829115800961DF9 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E2B2829115800961DF9 /* WorkoutModel.swift */; };
 		88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E2E2829317A00961DF9 /* RealmManager.swift */; };
 		88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA6E312829401200961DF9 /* SimpleAlert.swift */; };
+		88EAFCA5283BB61B0012580B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAFCA4283BB61B0012580B /* SettingsViewController.swift */; };
+		88EAFCA7283BBF470012580B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAFCA6283BBF470012580B /* UserModel.swift */; };
 		88EB271528365C1F008A7A14 /* ExercisesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EB271428365C1F008A7A14 /* ExercisesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,12 +78,15 @@
 		8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		8881472C2827D70700D2BDC2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
+		88AF45CC283A7643003E1673 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkCancelAlert.swift; sourceTree = "<group>"; };
 		88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWorkoutViewController.swift; sourceTree = "<group>"; };
 		88B8F4D42833E277006EF1CB /* ExerciseTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimerView.swift; sourceTree = "<group>"; };
 		88CA6E2B2829115800961DF9 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		88CA6E2E2829317A00961DF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		88CA6E312829401200961DF9 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		88EAFCA4283BB61B0012580B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		88EAFCA6283BBF470012580B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		88EB271428365C1F008A7A14 /* ExercisesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,7 @@
 				88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */,
 				8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */,
 				8881472C2827D70700D2BDC2 /* ProfileViewController.swift */,
+				88EAFCA4283BB61B0012580B /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				88CA6E2B2829115800961DF9 /* WorkoutModel.swift */,
+				88EAFCA6283BBF470012580B /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -166,6 +174,7 @@
 				882901B4283130A700A5CAE4 /* RepsWorkoutVC */,
 				88B8F4D32833E23F006EF1CB /* TimerVC */,
 				88EB271228365BDF008A7A14 /* StatisticVC */,
+				88AF45CB283A75E0003E1673 /* ProfileVC */,
 				88CA6E3028293F7B00961DF9 /* Alerts */,
 			);
 			path = Views;
@@ -247,6 +256,14 @@
 				882901B52831310300A5CAE4 /* ExerciseView.swift */,
 			);
 			path = RepsWorkoutVC;
+			sourceTree = "<group>";
+		};
+		88AF45CB283A75E0003E1673 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				88AF45CC283A7643003E1673 /* ProfileCollectionViewCell.swift */,
+			);
+			path = ProfileVC;
 			sourceTree = "<group>";
 		};
 		88B8F4D32833E23F006EF1CB /* TimerVC */ = {
@@ -370,14 +387,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88AF45CD283A7643003E1673 /* ProfileCollectionViewCell.swift in Sources */,
 				88B8F4D22833E02B006EF1CB /* TimerWorkoutViewController.swift in Sources */,
 				880FB41B2819C537002DB701 /* UIFont + Extensions.swift in Sources */,
 				882465C42834FB000090EC45 /* Date + Extension.swift in Sources */,
 				880FB41D2819C56E002DB701 /* UIColor + Extensions.swift in Sources */,
 				888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */,
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
+				88EAFCA5283BB61B0012580B /* SettingsViewController.swift in Sources */,
 				882901B62831310300A5CAE4 /* ExerciseView.swift in Sources */,
 				886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */,
+				88EAFCA7283BBF470012580B /* UserModel.swift in Sources */,
 				880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */,
 				8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */,
 				8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */,

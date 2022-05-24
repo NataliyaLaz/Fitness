@@ -143,29 +143,26 @@ class NewWorkoutViewController: UIViewController{
     
     private func setModel() {
         
-        guard let nameWorkout = nameTextField.text else { return}
+        guard let nameWorkout = nameTextField.text else { return }
         workoutModel.workoutName = nameWorkout
         
-        workoutModel.workoutDate = dateAndRepeatView.datePicker.date.localDate()
-        
-//        let calendar = Calendar.current
-//        let components = calendar.dateComponents([.weekday], from: dateAndRepeatView.datePicker.date)
-//        guard let weekday = components.weekday else { return}
+        workoutModel.workoutDate = dateAndRepeatView.datePicker.date.localDate()// date picker всегда передает время по гринвичу, поэтому переводим при помощи метода localDate()
+
         workoutModel.workoutNumberOfDay = dateAndRepeatView.datePicker.date.getWeekdayNumber()
         
-        workoutModel.workoutRepeat = (dateAndRepeatView.repeatSwitch.isOn)
+        workoutModel.workoutRepeat = dateAndRepeatView.repeatSwitch.isOn
         
         workoutModel.workoutSets = Int(repsOrTimerView.setsSlider.value)
         workoutModel.workoutReps = Int(repsOrTimerView.repsSlider.value)
         workoutModel.workoutTimer = Int(repsOrTimerView.timerSlider.value)
         
-        guard let imageData = testImage?.pngData() else { return}
+        guard let imageData = testImage?.pngData() else { return }
         workoutModel.workoutImage = imageData
     }
     
     private func saveModel() {
         
-        guard let text = nameTextField.text else { return}
+        guard let text = nameTextField.text else { return }
         let count = text.filter{$0.isNumber || $0.isLetter}.count
         
         if count != 0 && workoutModel.workoutSets != 0 && (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {

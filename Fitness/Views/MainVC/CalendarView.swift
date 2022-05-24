@@ -21,7 +21,6 @@ class CalendarView: UIView {
         return collectionView
     }()
     
-    
     private let idCalendarCell = "idCalendarCell"
     
     weak var cellCollectionViewDelegate: SelectCollectionViewItemProtocol?
@@ -53,53 +52,13 @@ class CalendarView: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
-//    private func weekArray() -> [[String]] {
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "en_GB")
-//        dateFormatter.dateFormat = "EEEEEE" //nsdateformatter.com 2 letters only
-//
-//        var weekArray: [[String]] = [[], []]
-//        let calendar = Calendar.current
-//        let today = Date()
-//
-//        for i in -6...0 {
-//            let date = calendar.date(byAdding: .weekday, value: i, to: today)// 2022-05-02 13:32:42 +0000
-//            guard let date = date else {return weekArray}
-//            let components = calendar.dateComponents([.day], from: date)// day: 2 isLeapMonth: false
-//            weekArray[1].append(String(components.day ?? 0))// [[], ["2"]]
-//            let weekDay = dateFormatter.string(from: date)// Mo
-//            weekArray[0].append(String(weekDay))// [["Mo"], ["2"]]
-//        }
-//
-//        return weekArray
-//
-//    }
-    
-    
 }
+
 //MARK: - UICollectionViewDelegate
 
 extension CalendarView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("collectionViewTap")
-//        let calendar = Calendar.current
-//        let formatter = DateFormatter()
-//        formatter.timeZone = TimeZone(abbreviation: "UTC")
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let components = calendar.dateComponents([.month, .year], from: Date())
-//        guard let month = components.month else { return }
-//        guard let year = components.year else { return }
-//
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell else { return }
-//        guard let numberOfDayString = cell.numberOfDayLabel.text else { return }
-//        guard let numberOfDay = Int(numberOfDayString) else { return }
-//
-//        guard let date = formatter.date(from: "\(year)/\(month)/\(numberOfDay) 00:00") else { return }
-//
-//        cellCollectionViewDelegate?.selectItem(date: date)
         
         let dateTimeZone = Date().localDate()
         

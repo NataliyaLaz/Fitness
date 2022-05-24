@@ -23,22 +23,23 @@ extension Date {
     }
     
     func startEndDate() -> (Date, Date) {
+        
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        formatter.timeZone = TimeZone(abbreviation: "UTC")//if u don't state timeZone, it will be not 00:00 but 21:03
+        formatter.dateFormat = "yyyy/MM/dd"//we don't state 00:00, it's so by default.
         
         let calendar = Calendar.current
         let day = calendar.component(.day, from: self)
         let month = calendar.component(.month, from: self)
         let year = calendar.component(.year, from: self)
+        let dateStart = formatter.date(from: "\(year)/\(month)/\(day)") ?? Date()//время здесь по гринвичу, formatter не учитывает нашу дату
+        let local = dateStart.localDate()
         
-        let dateStart = formatter.date(from: "\(year)/\(month)/\(day)") ?? Date()//we don't state 00:00, it's so by default
         let dateEnd:Date = {
-            let components = DateComponents(day: 1, second: -1)//23.59
-            return calendar.date(byAdding: components, to: dateStart) ?? Date()
+            let components = DateComponents(day: 1)//от 0:00 до 0:00
+            return calendar.date(byAdding: components, to: local) ?? Date()
         }()
         
-        return (dateStart, dateEnd)
+        return (local, dateEnd)
     }
     
     func offsetDays(days: Int) -> Date {
@@ -53,7 +54,8 @@ extension Date {
         formatter.dateFormat = "EEEEEE" //nsdateformatter.com 2 letters only
         
         var weekArray: [[String]] = [[], []]
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         for index in -6...0 {
             let date = calendar.date(byAdding: .weekday, value: index, to: self) ?? Date()

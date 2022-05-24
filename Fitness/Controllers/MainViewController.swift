@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
         tableView.bounces = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delaysContentTouches = false
-      // tableView.isHidden = true
+        tableView.isHidden = false
         return tableView
     }()
     
@@ -126,6 +126,7 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         view.addSubview(noWorkoutImageView)
+        
     }
     
     @objc private func addWorkoutButtonTapped() {
@@ -136,23 +137,8 @@ class MainViewController: UIViewController {
     }
     
     private func getWorkouts(date: Date) {
-
-//        let calendar = Calendar.current
-//        let formatter = DateFormatter()
-//        let components = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
-//        guard let weekday = components.weekday else { return}//2 if Monday (1 Sunday)
-//        guard let day = components.day else { return}
-//        guard let month = components.month else { return}
-//        guard let year = components.year else { return}
-//        formatter.timeZone = TimeZone(abbreviation: "UTC")
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//
-//        guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return}
-//        let dateEnd:Date = {
-//            let components = DateComponents(day: 1, second: -1)//23.59
-//            return calendar.date(byAdding: components, to: dateStart) ?? Date()
-//        }()
-        let dateTimeZone = date.localDate()
+        
+        let dateTimeZone = date
         let weekday = dateTimeZone.getWeekdayNumber()
         let (dateStart, dateEnd) = dateTimeZone.startEndDate()
         
@@ -161,8 +147,18 @@ class MainViewController: UIViewController {
         let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat, predicateUnrepeat])
         
         workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
+        checkWorkoutsToday()
         tableView.reloadData()
-        
+    }
+    
+    private func checkWorkoutsToday() {
+        if workoutArray.count == 0 {
+            tableView.isHidden = true
+            noWorkoutImageView.isHidden = false
+        } else {
+            tableView.isHidden = false
+            noWorkoutImageView.isHidden = true
+        }
     }
 }
 
@@ -224,7 +220,11 @@ extension MainViewController: SelectCollectionViewItemProtocol {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        workoutArray.count
+//        if workoutArray.count == 0 {
+//            tableView.isHidden = true
+//            noWorkoutImageView.isHidden = false
+//        }
+        return workoutArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
