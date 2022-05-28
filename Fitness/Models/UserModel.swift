@@ -15,4 +15,5 @@ class UserModel: Object {
     @Persisted var height: Int = 0
     @Persisted var weight: Int = 0
     @Persisted var target: Int = 0
+    @Persisted var image: Data?
 }

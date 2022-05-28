@@ -65,6 +65,27 @@ class ExercisesTableViewCell: UITableViewCell {
         addSubview(separateLineView)
     }
     
+    func cellConfigure(differenceWorkout: DifferenceWorkout){
+        workoutTitleLabel.text = differenceWorkout.name
+        beforeLabel.text = "Before: \(differenceWorkout.firstReps)"
+        nowLabel.text = "Now: \(differenceWorkout.lastReps)"
+        
+        let difference = differenceWorkout.lastReps - differenceWorkout.firstReps
+        
+        if differenceWorkout.unique == true {
+            differenceLabel.text = "no data"
+        } else {
+            differenceLabel.text = "\(difference)"
+        }
+        
+        switch difference{
+        case ..<0: differenceLabel.textColor = .specialGreen
+        case 1...: differenceLabel.textColor = .specialYellow
+        default:
+            differenceLabel.textColor = .specialGray
+        }
+    }
+    
     private func setConstraints() {
 
         NSLayoutConstraint.activate([

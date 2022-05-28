@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
+
+struct DifferenceWorkout {
+    let name: String
+    let lastReps: Int
+    let firstReps: Int
+    let unique: Bool
+}
 
 class StatisticViewController: UIViewController {
     
@@ -27,15 +35,19 @@ class StatisticViewController: UIViewController {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl()
+        let control = UISegmentedControl(items: ["Week", "Month"])
+        control.selectedSegmentIndex = 0
         control.backgroundColor = .specialGreen
-        control.insertSegment(withTitle: "Week", at: 0, animated: true)
-        control.insertSegment(withTitle: "Month", at: 1, animated: true)
         control.selectedSegmentTintColor = .specialYellow
-        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.normal)
-        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.specialGray], for: UIControl.State.selected)
-        control.translatesAutoresizingMaskIntoConstraints = false
+        let font = UIFont(name: "Roboto-Medium", size: 16)
+        control.setTitleTextAttributes([NSAttributedString.Key.font:font as Any,
+                                        NSAttributedString.Key.foregroundColor: UIColor.white],
+                                        for: UIControl.State.normal)
+        control.setTitleTextAttributes([NSAttributedString.Key.font:font as Any,
+                                        NSAttributedString.Key.foregroundColor: UIColor.specialGray],
+                                        for: UIControl.State.selected)
         control.addTarget(self, action: #selector (segmentedValueChanged), for: .valueChanged)
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
@@ -46,13 +58,26 @@ class StatisticViewController: UIViewController {
         tableView.backgroundColor = .none
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.bounces = false
+        tableView.bounces = false//чтобы не ездила таблица и зажатии и когда тянешь вниз
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.delaysContentTouches = false
+        //tableView.delaysContentTouches = false
         return tableView
     }()
     
-    private let idExercisesTableViewCell = "idExercisesTableViewCell"
+    private let idStatisticTableViewCell = "idStatisticTableViewCell"
+    
+    let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>!
+    
+    var differenceArray = [DifferenceWorkout]()
+    
+    let dateToday = Date().localDate()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +85,21 @@ class StatisticViewController: UIViewController {
         setupViews()
         setConstraints()
         setDelegates()
-        tableView.register(ExercisesTableViewCell.self, forCellReuseIdentifier: idExercisesTableViewCell)
+        setStartScreen()
+    }
+    
+    deinit {
+        print ("StatisticViewController was deinited")
     }
     
     private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setStartScreen(){
+        getDifferenceModel(dateStart: dateToday.offsetDays(days: 7))
+        tableView.reloadData()
     }
     
     private func setupViews() {
@@ -78,11 +112,54 @@ class StatisticViewController: UIViewController {
         scrollView.addSubview(exercisesLabel)
         scrollView.addSubview(tableView)
         
+        tableView.register(ExercisesTableViewCell.self, forCellReuseIdentifier: idStatisticTableViewCell)
     }
     @objc func segmentedValueChanged(_ sender:UISegmentedControl)
         {
-            print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
+            differenceArray = [DifferenceWorkout]()// обнуляем массив при смене сегмента
+            
+            if segmentedControl.selectedSegmentIndex == 0{
+                let dateStart = dateToday.offsetDays(days: 7)
+                getDifferenceModel(dateStart: dateStart)
+            } else {
+                let dateStart = dateToday.offsetMonths(months: 1)
+                getDifferenceModel(dateStart: dateStart)
+            }
+            tableView.reloadData()
         }
+    
+    private func getWorkoutsName() -> [String] {
+        
+        var nameArray = [String]()
+        workoutArray = localRealm.objects(WorkoutModel.self)
+        
+        for workoutModel in workoutArray {
+            if !nameArray.contains(workoutModel.workoutName){
+                nameArray.append(workoutModel.workoutName)
+            }
+        }
+        return nameArray
+    }
+    
+    private func getDifferenceModel(dateStart: Date) {
+        
+        let dateEnd = Date().localDate()
+        let nameArray = getWorkoutsName()
+        
+        for name in nameArray {
+            let predicateDifference = NSPredicate(format: "workoutName = '\(name)' AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateDifference).sorted(byKeyPath: "workoutDate")
+            
+            guard let last = workoutArray.last?.workoutReps,
+                  let first = workoutArray.first?.workoutReps else { return }
+            
+            let unique: Bool
+            unique = workoutArray.count == 1
+            
+            let differenceWorkout = DifferenceWorkout(name: name, lastReps: last, firstReps: first, unique: unique)
+            differenceArray.append(differenceWorkout)
+        }
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -99,11 +176,13 @@ extension StatisticViewController: UITableViewDelegate {
 extension StatisticViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        differenceArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idExercisesTableViewCell, for: indexPath) as! ExercisesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticTableViewCell, for: indexPath) as! ExercisesTableViewCell
+        let differenceModel = differenceArray[indexPath.row]
+        cell.cellConfigure(differenceWorkout: differenceModel)
         return cell
     }
 }

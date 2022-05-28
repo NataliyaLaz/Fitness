@@ -60,12 +60,11 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         addSubview(repsTotalLabel)
     }
     
-    func cellConfigure(){
-        if backgroundColor == .specialYellow || backgroundColor == nil {
-            backgroundColor = .specialGreen
-        } else {
-            backgroundColor = .specialYellow
-        }
+    func cellConfigure(model: ResultWorkout){
+        exerciseTitleLabel.text = model.name
+        repsTotalLabel.text = String(model.result)
+        guard let data = model.imageData else { return }
+        exerciseImageView.image = UIImage(data: data)
     }
     
     private func setConstraints() {

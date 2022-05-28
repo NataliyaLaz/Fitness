@@ -156,7 +156,7 @@ class CustomAlert {
             if done {
                 UIView.animate(withDuration: 0.3) {
                     self.backgroundView.alpha = 0
-                } completion: { [weak self] done in// in closures we shoud have weak self
+                } completion: { [weak self] done in// in closures we should have weak self!!!. [] - потому что для всех элементов
                     guard let self = self else { return }
                     if done {
                         self.alertView.removeFromSuperview()

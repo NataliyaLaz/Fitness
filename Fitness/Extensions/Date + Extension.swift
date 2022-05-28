@@ -47,6 +47,11 @@ extension Date {
         return offsetDate
     }
     
+    func offsetMonths(months: Int) -> Date {
+        let offsetDate = Calendar.current.date(byAdding: .month, value: -months, to: self) ?? Date()
+        return offsetDate
+    }
+    
     func getWeekArray() -> [[String]] {
         
         let formatter = DateFormatter()

@@ -96,6 +96,10 @@ class TimerWorkoutViewController: UIViewController {
         print(workoutModel)
     }
     
+    deinit {
+        print ("TimerViewController was deinited")
+    }
+    
     private func setDelegates() {
         exerciseTimerView.cellNextSetTimerDelegate = self
     }

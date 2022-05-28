@@ -37,20 +37,8 @@ class NewWorkoutViewController: UIViewController{
     
     private let nameLabel = UILabel(text: "Name")
     
-    private let nameTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
-    
+    private let nameTextField = UITextField(text: "")
+   
     private let dateAndRepeatLabel = UILabel(text: "Date and repeat")
     
     private let repsOrTimerLabel = UILabel(text: "Reps or timer")

@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
         imageView.backgroundColor = #colorLiteral(red: 0.7607843137, green: 0.7607843137, blue: 0.7607843137, alpha: 1)
         imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -83,6 +85,7 @@ class MainViewController: UIViewController {
     
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -90,6 +93,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userArray = localRealm.objects(UserModel.self)
         
         setupViews()
         setConstraints()
@@ -100,6 +104,8 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupUserParameters()
         
         tableView.reloadData()
     }
@@ -158,6 +164,16 @@ class MainViewController: UIViewController {
         } else {
             tableView.isHidden = false
             noWorkoutImageView.isHidden = true
+        }
+    }
+    
+    func setupUserParameters() {
+        if userArray.count != 0 {
+            userNameLabel.text = userArray[0].firstName + " " + userArray[0].secondName
+            
+            guard let data = userArray[0].image else { return }
+            guard let image = UIImage(data: data) else { return }
+            userPhotoImageView.image = image
         }
     }
 }

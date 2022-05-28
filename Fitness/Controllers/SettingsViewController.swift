@@ -32,6 +32,9 @@ class SettingsViewController: UIViewController{
         imageView.backgroundColor = #colorLiteral(red: 0.7607843137, green: 0.7607843137, blue: 0.7607843137, alpha: 1)
         imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.image = UIImage(named: "addPhoto")
+        imageView.contentMode = .center
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -46,83 +49,23 @@ class SettingsViewController: UIViewController{
     
     private let firstNameLabel = UILabel(text: "First name")
     
-    let firstNameTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
+    private let firstNameTextField = UITextField(text: "")
     
     private let secondNameLabel = UILabel(text: "Second name")
     
-    private let secondNameTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
+    private let secondNameTextField = UITextField(text: "")
     
     private let heightLabel = UILabel(text: "Height")
     
-    private let heightTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
+    private let heightTextField = UITextField(text: "")
     
     private let weightLabel = UILabel(text: "Weight")
     
-    private let weightTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
+    private let weightTextField = UITextField(text: "")
     
     private let targetLabel = UILabel(text: "Target (number of workouts)")
     
-    private let targetTextField: UITextField = {
-        let textfield = UITextField()
-        textfield.backgroundColor = .specialBrown
-        textfield.layer.cornerRadius = 10
-        textfield.textColor = .specialGray
-        textfield.font = .robotoBold20()
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.clearButtonMode = .always
-        textfield.returnKeyType = .done
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
-    }()
+    private let targetTextField = UITextField(text: "")
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -136,7 +79,15 @@ class SettingsViewController: UIViewController{
         return button
     }()
     
+    private var firstNameStackView = UIStackView()
+    private var secondNameStackView = UIStackView()
+    private var heightStackView = UIStackView()
+    private var weightStackView = UIStackView()
+    private var targetStackView = UIStackView()
+    private var generalStackView = UIStackView()
+    
     private let localRealm = try! Realm()
+    private var userArray: Results<UserModel>!
     
     private var userModel = UserModel()
     
@@ -147,8 +98,16 @@ class SettingsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userArray = localRealm.objects(UserModel.self)
+
         setupViews()
         setConstraints()
+        addTaps()
+        loadUserInfo()
+    }
+    
+    deinit {
+        print ("Settings ViewController was deinited")
     }
     
     private func setupViews() {
@@ -158,17 +117,35 @@ class SettingsViewController: UIViewController{
         view.addSubview(closeButton)
         view.addSubview(profileView)
         view.addSubview(userPhotoImageView)
-        view.addSubview(firstNameLabel)
-        view.addSubview(firstNameTextField)
-        view.addSubview(secondNameLabel)
-        view.addSubview(secondNameTextField)
-        view.addSubview(heightLabel)
-        view.addSubview(heightTextField)
-        view.addSubview(weightLabel)
-        view.addSubview(weightTextField)
-        view.addSubview(targetLabel)
-        view.addSubview(targetTextField)
-        view.addSubview((saveButton))
+        firstNameStackView = UIStackView(arrangedSubviews: [firstNameLabel, firstNameTextField],
+                                         axis: .vertical,
+                                         spacing: 3)
+        
+        secondNameStackView = UIStackView(arrangedSubviews: [secondNameLabel, secondNameTextField],
+                                         axis: .vertical,
+                                         spacing: 3)
+        
+        heightStackView = UIStackView(arrangedSubviews: [heightLabel, heightTextField],
+                                         axis: .vertical,
+                                         spacing: 3)
+        
+        weightStackView = UIStackView(arrangedSubviews: [weightLabel, weightTextField],
+                                         axis: .vertical,
+                                         spacing: 3)
+        
+        targetStackView = UIStackView(arrangedSubviews: [targetLabel, targetTextField],
+                                         axis: .vertical,
+                                         spacing: 3)
+        
+        generalStackView = UIStackView(arrangedSubviews: [firstNameStackView,
+                                                         secondNameStackView,
+                                                         heightStackView,
+                                                         weightStackView,
+                                                         targetStackView],
+                                       axis: .vertical,
+                                       spacing: 20)
+        view.addSubview(generalStackView)
+        view.addSubview(saveButton)
     }
     
     @objc private func closeButtonTapped() {
@@ -177,41 +154,92 @@ class SettingsViewController: UIViewController{
     
     @objc private func saveButtonTapped() {
         dismiss(animated: true, completion: nil)
+        
         setModel()
-        saveModel()
-        RealmManager.shared.updateUserModel(model: userModel)
+
+        if userArray.count == 0 {
+            RealmManager.shared.saveUserModel(model: userModel)
+        } else {
+            RealmManager.shared.updateUserModel(model: userModel)
+        }
+        userModel = UserModel()//обязательно нужно обнулять наш экземпляр, иначе ошибка будет при повторном нажатии кнопки save
     }
     
     private func setModel() {
         
-        guard let userName = firstNameTextField.text else { return }
+        guard let userName = firstNameTextField.text,
+              let userSecondName = secondNameTextField.text,
+              let userHeight = heightTextField.text,
+              let userWeight = weightTextField.text,
+              let userTarget = targetTextField.text
+        else { return }
+        
+        guard let intHeight = Int(userHeight),
+              let intWeight = Int(userWeight),
+              let intTarget = Int(userTarget)
+        else { return }
+        
         userModel.firstName = userName
-        
-        guard let userSecondName = secondNameTextField.text else { return }
         userModel.secondName = userSecondName
+        userModel.height = intHeight
+        userModel.weight = intWeight
+        userModel.target = intTarget
         
-        guard let userHeight = heightTextField.text else { return }
-        userModel.height = Int(userHeight) ?? 0
-
-        guard let userWeight = weightTextField.text else { return }
-        userModel.weight = Int(userWeight) ?? 0
-        
-        guard let userTarget = targetTextField.text else { return }
-        userModel.target = Int(userTarget) ?? 0
-    }
-    
-    private func saveModel() {
-        
-        guard let text = firstNameTextField.text else { return }
-        let count = text.filter{$0.isNumber || $0.isLetter}.count
-        
-        if count != 0 {
-            RealmManager.shared.saveUserModel(model: userModel)
-            userModel = UserModel()
+        if userPhotoImageView.image == UIImage(named: "addPhoto") {
+            userModel.image = nil
+        } else {
+            guard let userImage = userPhotoImageView.image?.pngData() else { return }
+            userModel.image = userImage
         }
     }
-
     
+    private func loadUserInfo() {
+        if userArray.count != 0 {
+            firstNameTextField.text = userArray[0].firstName
+            secondNameTextField.text = userArray[0].secondName
+            heightTextField.text = "\(userArray[0].height)"
+            weightTextField.text = "\(userArray[0].weight)"
+            targetTextField.text = "\(userArray[0].target)"
+            guard let data = userArray[0].image else { return }
+            guard let image = UIImage(data: data) else { return }
+            userPhotoImageView.image = image
+            userPhotoImageView.contentMode = .scaleAspectFit
+        }
+    }
+    
+    private func addTaps() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(setUserPhoto))
+        userPhotoImageView.isUserInteractionEnabled = true
+        userPhotoImageView.addGestureRecognizer(tapScreen)
+    }
+    
+    @objc private func setUserPhoto() {
+        alertGalleryOrPhoto { [weak self] source in//source передается из completion handler + weak self - слабая ссылка на метод, который мы применяем (addTaps)
+            guard let self = self else { return }
+            self.chooseImagePicker(source: source)
+        }
+    }
+}
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func chooseImagePicker(source: UIImagePickerController.SourceType){// we get this source from alert
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true//увеличивать, выбирать какую-то часть и тд
+            imagePicker.sourceType = source// получили из алерта
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as? UIImage
+        userPhotoImageView.image = image
+        userPhotoImageView.contentMode = .scaleAspectFit
+        dismiss(animated: true)//убирается PickerController
+    }
 }
 
 //MARK: - SetConstraints
@@ -248,68 +276,15 @@ extension SettingsViewController {
         ])
         
         NSLayoutConstraint.activate([
-            firstNameLabel.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 40),
-            firstNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            firstNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            firstNameTextField.topAnchor.constraint(equalTo: firstNameLabel.bottomAnchor, constant: 3),
-            firstNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            firstNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            firstNameTextField.heightAnchor.constraint(equalToConstant: 38)
-        ])
-        
-        NSLayoutConstraint.activate([
-            secondNameLabel.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: 14),
-            secondNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            secondNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            secondNameTextField.topAnchor.constraint(equalTo: secondNameLabel.bottomAnchor, constant: 3),
-            secondNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            secondNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            secondNameTextField.heightAnchor.constraint(equalToConstant: 38)
-        ])
-        
-        NSLayoutConstraint.activate([
-            heightLabel.topAnchor.constraint(equalTo: secondNameTextField.bottomAnchor, constant: 14),
-            heightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            heightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            heightTextField.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 3),
-            heightTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            heightTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            heightTextField.heightAnchor.constraint(equalToConstant: 38)
-        ])
-        
-        NSLayoutConstraint.activate([
-            weightLabel.topAnchor.constraint(equalTo: heightTextField.bottomAnchor, constant: 14),
-            weightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            weightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            weightTextField.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 3),
-            weightTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            weightTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            weightTextField.heightAnchor.constraint(equalToConstant: 38)
-        ])
-        
-        NSLayoutConstraint.activate([
-            targetLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 14),
-            targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            targetLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
-            targetTextField.topAnchor.constraint(equalTo: targetLabel.bottomAnchor, constant: 3),
-            targetTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            targetTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            targetTextField.heightAnchor.constraint(equalToConstant: 38)
+            firstNameTextField.heightAnchor.constraint(equalToConstant: 40),
+            secondNameTextField.heightAnchor.constraint(equalToConstant: 40),
+            heightTextField.heightAnchor.constraint(equalToConstant: 40),
+            weightTextField.heightAnchor.constraint(equalToConstant: 40),
+            targetTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            generalStackView.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 20),
+            generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
         
         NSLayoutConstraint.activate([
@@ -318,6 +293,5 @@ extension SettingsViewController {
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 55)
         ])
-        
     }
 }
