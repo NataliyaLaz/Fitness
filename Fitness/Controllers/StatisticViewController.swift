@@ -12,6 +12,8 @@ struct DifferenceWorkout {
     let name: String
     let lastReps: Int
     let firstReps: Int
+    let lastTimer: Int
+    let firstTimer: Int
     let unique: Bool
 }
 
@@ -75,7 +77,8 @@ class StatisticViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        
+        updateTableViewData()
     }
     
     
@@ -102,6 +105,20 @@ class StatisticViewController: UIViewController {
         tableView.reloadData()
     }
     
+    private func updateTableViewData() {
+        differenceArray = [DifferenceWorkout]()// обнуляем массив при смене сегмента
+        
+        if segmentedControl.selectedSegmentIndex == 0{
+            let dateStart = dateToday.offsetDays(days: 7)
+            getDifferenceModel(dateStart: dateStart)
+        } else {
+            let dateStart = dateToday.offsetMonths(months: 1)
+            getDifferenceModel(dateStart: dateStart)
+        }
+        
+        tableView.reloadData()
+    }
+    
     private func setupViews() {
         view.backgroundColor = .specialBackground
         
@@ -114,18 +131,10 @@ class StatisticViewController: UIViewController {
         
         tableView.register(ExercisesTableViewCell.self, forCellReuseIdentifier: idStatisticTableViewCell)
     }
+    
     @objc func segmentedValueChanged(_ sender:UISegmentedControl)
         {
-            differenceArray = [DifferenceWorkout]()// обнуляем массив при смене сегмента
-            
-            if segmentedControl.selectedSegmentIndex == 0{
-                let dateStart = dateToday.offsetDays(days: 7)
-                getDifferenceModel(dateStart: dateStart)
-            } else {
-                let dateStart = dateToday.offsetMonths(months: 1)
-                getDifferenceModel(dateStart: dateStart)
-            }
-            tableView.reloadData()
+            updateTableViewData()
         }
     
     private func getWorkoutsName() -> [String] {
@@ -153,10 +162,13 @@ class StatisticViewController: UIViewController {
             guard let last = workoutArray.last?.workoutReps,
                   let first = workoutArray.first?.workoutReps else { return }
             
+            guard let lastTimer = workoutArray.last?.workoutTimer,
+                  let firstTimer = workoutArray.first?.workoutTimer else { return }
+            
             let unique: Bool
             unique = workoutArray.count == 1
             
-            let differenceWorkout = DifferenceWorkout(name: name, lastReps: last, firstReps: first, unique: unique)
+            let differenceWorkout = DifferenceWorkout(name: name, lastReps: last, firstReps: first, lastTimer: lastTimer, firstTimer: firstTimer, unique: unique)
             differenceArray.append(differenceWorkout)
         }
     }

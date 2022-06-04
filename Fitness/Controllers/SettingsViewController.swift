@@ -63,7 +63,7 @@ class SettingsViewController: UIViewController{
     
     private let weightTextField = UITextField(text: "")
     
-    private let targetLabel = UILabel(text: "Target (number of workouts)")
+    private let targetLabel = UILabel(text: "No gap chellange (number of days)")
     
     private let targetTextField = UITextField(text: "")
     

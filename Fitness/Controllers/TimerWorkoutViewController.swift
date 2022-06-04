@@ -179,7 +179,6 @@ class TimerWorkoutViewController: UIViewController {
                 
                 numberOfSet += 1
                 exerciseTimerView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
-                
                 exerciseTimerView.editingButton.isEnabled = true
                 exerciseTimerView.nextSetButton.isEnabled = true
                 mainTimerLabel.isUserInteractionEnabled = true

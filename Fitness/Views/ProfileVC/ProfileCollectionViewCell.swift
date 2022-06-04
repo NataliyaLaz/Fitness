@@ -62,7 +62,12 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     
     func cellConfigure(model: ResultWorkout){
         exerciseTitleLabel.text = model.name
-        repsTotalLabel.text = String(model.result)
+        if model.timer {
+            let(min, sec) = model.result.convertSeconds()
+            repsTotalLabel.text = "\(min):\(sec)"
+        } else {
+            repsTotalLabel.text = String(model.result)
+        }
         guard let data = model.imageData else { return }
         exerciseImageView.image = UIImage(data: data)
     }

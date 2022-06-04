@@ -12,6 +12,7 @@ struct ResultWorkout {
     let name: String
     let result: Int
     let imageData: Data?
+    let timer: Bool
 }
 
 class ProfileViewController: UIViewController {
@@ -111,7 +112,7 @@ class ProfileViewController: UIViewController {
     
     private let targetLabel: UILabel = {
         let label = UILabel()
-        label.text = "TARGET: _ workouts"
+        label.text = "WEEK CHALLENGE: _ workouts"
         label.textColor = .specialGray
         label.font = .robotoBold16()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -136,21 +137,21 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    private let targetView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 14
-        view.backgroundColor = .specialBrown
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let targetUpperView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 14
-        view.backgroundColor = .specialGreen
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    private let targetView: UIView = {
+//        let view = UIView()
+//        view.layer.cornerRadius = 14
+//        view.backgroundColor = .specialBrown
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
+//
+//    private let targetUpperView: UIView = {
+//        let view = UIView()
+//        view.layer.cornerRadius = 14
+//        view.backgroundColor = .specialGreen
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     private let progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -218,8 +219,8 @@ class ProfileViewController: UIViewController {
                                          axis: .horizontal,
                                          spacing: 10)
         view.addSubview(targetStackView)
-        view.addSubview(targetView)
-        view.addSubview(targetUpperView)
+       // view.addSubview(targetView)
+       // view.addSubview(targetUpperView)
         view.addSubview(progressView)
     }
     
@@ -257,11 +258,17 @@ class ProfileViewController: UIViewController {
             workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateName)
             var result = 0
             var image: Data?
+            var timer = false
             workoutArray.forEach { model in
-                result += model.workoutReps
+                if model.workoutReps == 0 {
+                    result += model.workoutTimer
+                    timer = true
+                } else {
+                    result += model.workoutReps
+                }
                 image = model.workoutImage
             }
-            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            let resultModel = ResultWorkout(name: name, result: result, imageData: image, timer: timer)
             resultWorkout.append(resultModel)
         }
     }
@@ -271,13 +278,58 @@ class ProfileViewController: UIViewController {
             nameLabel.text = userArray[0].firstName + " " + userArray[0].secondName
             heightLabel.text = "Height: \(userArray[0].height)"
             weightLabel.text = "Weight: \(userArray[0].weight)"
-            targetLabel.text = "TARGET: \(userArray[0].target) workouts"
+            targetLabel.text = "WEEK CHALLENGENGE: \(userArray[0].target) workouts"
             targetEndLabel.text = "\(userArray[0].target)"
             
             guard let data = userArray[0].image else { return }
             guard let image = UIImage(data: data) else { return }
             userPhotoImageView.image = image
         }
+    }
+    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: collectionView.frame.width/2.07,
+               height: collectionView.frame.height/2.07)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        let dateEnd = Date().localDate()
+        guard let numberOfTarget = Int(targetEndLabel.text ?? "0") else { return }
+        let dateStart = dateEnd.offsetDays(days: numberOfTarget)
+        let model = resultWorkout[indexPath.row]
+        let predicateTarget = NSPredicate(format: "workoutName = '\(model.name)' AND status = true AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+        workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateTarget)
+        let progress = Float(workoutArray.count) / Float(numberOfTarget)
+        targetStartLabel.text = "\(workoutArray.count)"
+        progressView.setProgress(progress, animated: true)
+    }
+}
+
+//MARK: - UICollectionViewDataSource
+
+extension ProfileViewController: UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        resultWorkout.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCell, for: indexPath) as! ProfileCollectionViewCell
+        let model = resultWorkout[indexPath.row]
+        cell.cellConfigure(model: model)
+        cell.backgroundColor = (indexPath.row % 4 == 0) || (indexPath.row % 4 == 3) ? .specialGreen : .specialYellow
+        return cell
     }
 }
 
@@ -344,22 +396,22 @@ extension ProfileViewController {
             targetStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
-        NSLayoutConstraint.activate([
-            targetView.topAnchor.constraint(equalTo: targetEndLabel.bottomAnchor, constant: 3),
-            targetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            targetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            targetView.heightAnchor.constraint(equalToConstant: 28)
-        ])
+//        NSLayoutConstraint.activate([
+//            targetView.topAnchor.constraint(equalTo: targetEndLabel.bottomAnchor, constant: 3),
+//            targetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            targetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            targetView.heightAnchor.constraint(equalToConstant: 28)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            targetUpperView.topAnchor.constraint(equalTo: targetEndLabel.bottomAnchor, constant: 3),
+//            targetUpperView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            targetUpperView.heightAnchor.constraint(equalToConstant: 28),
+//            targetUpperView.widthAnchor.constraint(equalToConstant: 0)
+//        ])
         
         NSLayoutConstraint.activate([
-            targetUpperView.topAnchor.constraint(equalTo: targetEndLabel.bottomAnchor, constant: 3),
-            targetUpperView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            targetUpperView.heightAnchor.constraint(equalToConstant: 28),
-            targetUpperView.widthAnchor.constraint(equalToConstant: 100)
-        ])
-        
-        NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: targetView.bottomAnchor, constant: 10),
+            progressView.topAnchor.constraint(equalTo: targetStackView.bottomAnchor, constant: 10),
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             progressView.heightAnchor.constraint(equalToConstant: 28)
@@ -367,38 +419,4 @@ extension ProfileViewController {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
-
-extension ProfileViewController: UICollectionViewDelegateFlowLayout{
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width/2.07,
-               height: collectionView.frame.height/2.07)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        progressView.setProgress(0.6, animated: true)
-    }
-}
-
-//MARK: - UICollectionViewDataSource
-
-extension ProfileViewController: UICollectionViewDataSource{
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        resultWorkout.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCell, for: indexPath) as! ProfileCollectionViewCell
-        let model = resultWorkout[indexPath.row]
-        cell.cellConfigure(model: model)
-        cell.backgroundColor = (indexPath.row % 4 == 0) || (indexPath.row % 4 == 3) ? .specialGreen : .specialYellow
-        return cell
-    }
-}
 

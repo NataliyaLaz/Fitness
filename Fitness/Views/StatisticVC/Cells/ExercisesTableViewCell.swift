@@ -30,7 +30,7 @@ class ExercisesTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "No data"
         label.textAlignment = .right
-        label.font = UIFont.robotoMedium24()
+        label.font = UIFont.robotoMedium16()
         label.textColor = .specialGreen
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,20 +67,33 @@ class ExercisesTableViewCell: UITableViewCell {
     
     func cellConfigure(differenceWorkout: DifferenceWorkout){
         workoutTitleLabel.text = differenceWorkout.name
-        beforeLabel.text = "Before: \(differenceWorkout.firstReps)"
-        nowLabel.text = "Now: \(differenceWorkout.lastReps)"
         
-        let difference = differenceWorkout.lastReps - differenceWorkout.firstReps
+        var difference = 0
         
-        if differenceWorkout.unique == true {
-            differenceLabel.text = "no data"
+        if differenceWorkout.lastTimer == 0 {
+            beforeLabel.text = "Before: \(differenceWorkout.firstReps)"
+            nowLabel.text = "Now: \(differenceWorkout.lastReps)"
+            difference = differenceWorkout.lastReps - differenceWorkout.firstReps
+            differenceLabel.text = differenceWorkout.unique ? "na data" : "\(difference)"
         } else {
-            differenceLabel.text = "\(difference)"
+            difference = differenceWorkout.lastTimer - differenceWorkout.firstTimer
+            let (minBefore, secBefore) = differenceWorkout.firstTimer.convertSeconds()
+            let (minNow, secNow) = differenceWorkout.lastTimer.convertSeconds()
+            let (minDif, secDif) = difference.convertSeconds()
+            beforeLabel.text = "Before: \(minBefore) min \(secBefore) sec"
+            nowLabel.text = "Now: \(minNow) min \(secNow) sec"
+            if differenceWorkout.unique {
+                differenceLabel.text = "na data"
+            } else if minDif == 0 {
+                differenceLabel.text = "\(secDif) sec"
+            } else {
+                differenceLabel.text = "\(minDif) min \(abs(secDif)) sec"
+            }
         }
         
         switch difference{
         case ..<0: differenceLabel.textColor = .specialGreen
-        case 1...: differenceLabel.textColor = .specialYellow
+        case 1...: differenceLabel.textColor = .specialDarkYellow
         default:
             differenceLabel.textColor = .specialGray
         }
@@ -109,9 +122,9 @@ class ExercisesTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            differenceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            differenceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             differenceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            differenceLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
+            differenceLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5)
         ])
     }
 }
