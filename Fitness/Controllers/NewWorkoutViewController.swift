@@ -155,6 +155,7 @@ class NewWorkoutViewController: UIViewController{
         
         if count != 0 && workoutModel.workoutSets != 0 && (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            createNotification()
             alertOK(title: "Success", message: nil)
             workoutModel = WorkoutModel()
             refreshWorkoutObjects()
@@ -174,6 +175,12 @@ class NewWorkoutViewController: UIViewController{
         repsOrTimerView.setsSlider.value = 0
         repsOrTimerView.repsSlider.value = 0
         repsOrTimerView.timerSlider.value = 0
+    }
+    
+    private func createNotification() {
+        let notifications = Notifications()
+        let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
+        notifications.scheduleDateNotofication(date: workoutModel.workoutDate, id: "workout" + stringDate)//id у всех уведомлений за сегодняшний день будет одинаковый, следовательно, будут перезаписываться
     }
 }
 

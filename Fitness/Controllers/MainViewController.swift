@@ -94,7 +94,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userArray = localRealm.objects(UserModel.self)
-        
+        print ("MainViewController viewDidLoad")
         setupViews()
         setConstraints()
         setDelegates()
@@ -104,11 +104,17 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setupUserParameters()
-        
-        tableView.reloadData()
+        print ("MainViewController viewWillAppear")
+        getWorkouts(date: Date())
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print ("MainViewController viewDidAppear")
+        showOnboarding()
+    }
+    
     
     deinit {
         print ("MainViewController was deinited")
@@ -174,6 +180,16 @@ class MainViewController: UIViewController {
             guard let data = userArray[0].image else { return }
             guard let image = UIImage(data: data) else { return }
             userPhotoImageView.image = image
+        }
+    }
+    
+    private func showOnboarding() {
+        let userDefaults = UserDefaults.standard
+        let onBoardingWasViewed = userDefaults.bool(forKey: "OnboardingWasViewed")
+        if onBoardingWasViewed == false {
+            let onboardingViewController = OnboardingViewController()
+            onboardingViewController.modalPresentationStyle = .fullScreen
+            present(onboardingViewController,animated: false)
         }
     }
 }

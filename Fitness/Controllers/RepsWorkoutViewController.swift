@@ -74,8 +74,7 @@ class RepsWorkoutViewController:UIViewController {
         setConstraints()
         setWorkoutParameters()
         setDelegates()
-        
-        print(workoutModel)
+
     }
     
     private func setDelegates() {

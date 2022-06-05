@@ -93,7 +93,6 @@ class TimerWorkoutViewController: UIViewController {
         setDelegates()
         addTaps()
         
-        print(workoutModel)
     }
     
     deinit {

@@ -29,6 +29,8 @@
 		8829C0DB281E82C300E3B8F5 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DA281E82C300E3B8F5 /* WeatherView.swift */; };
 		8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */; };
 		882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */; };
+		8839558F284CCF410045D513 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839558E284CCF410045D513 /* OnboardingViewController.swift */; };
+		88395592284CD2780045D513 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88395591284CD2780045D513 /* OnboardingCollectionViewCell.swift */; };
 		886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886F14712837C5E900A6D22E /* Int + Extension.swift */; };
 		888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888147282827D39F00D2BDC2 /* MainTabBarController.swift */; };
 		8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */; };
@@ -36,6 +38,7 @@
 		8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */; };
 		88898CEF283FBDBF00C183A6 /* UITextField + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88898CEE283FBDBF00C183A6 /* UITextField + Extensions.swift */; };
 		88898CF1283FC48200C183A6 /* GallaryOrPhotoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88898CF0283FC48200C183A6 /* GallaryOrPhotoAlert.swift */; };
+		889F2107284BA23C00C20D6F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889F2106284BA23C00C20D6F /* Notifications.swift */; };
 		88AF45CD283A7643003E1673 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AF45CC283A7643003E1673 /* ProfileCollectionViewCell.swift */; };
 		88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */; };
 		88B8F4D22833E02B006EF1CB /* TimerWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */; };
@@ -75,6 +78,8 @@
 		8829C0DA281E82C300E3B8F5 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		8829C0DC281ECB9100E3B8F5 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
+		8839558E284CCF410045D513 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		88395591284CD2780045D513 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		886F14712837C5E900A6D22E /* Int + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extension.swift"; sourceTree = "<group>"; };
 		888147282827D39F00D2BDC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8881472A2827D6F300D2BDC2 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		8881472E2827E50D00D2BDC2 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
 		88898CEE283FBDBF00C183A6 /* UITextField + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extensions.swift"; sourceTree = "<group>"; };
 		88898CF0283FC48200C183A6 /* GallaryOrPhotoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryOrPhotoAlert.swift; sourceTree = "<group>"; };
+		889F2106284BA23C00C20D6F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		88AF45CC283A7643003E1673 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		88B8F4CF2833A243006EF1CB /* OkCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkCancelAlert.swift; sourceTree = "<group>"; };
 		88B8F4D12833E02B006EF1CB /* TimerWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 		880FB40E2819C108002DB701 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8839558E284CCF410045D513 /* OnboardingViewController.swift */,
 				888147282827D39F00D2BDC2 /* MainTabBarController.swift */,
 				880FB3FE2819BCBB002DB701 /* MainViewController.swift */,
 				882EFB2F282195C9004837B7 /* NewWorkoutViewController.swift */,
@@ -157,6 +164,7 @@
 			children = (
 				880FB3FA2819BCBB002DB701 /* AppDelegate.swift */,
 				880FB3FC2819BCBB002DB701 /* SceneDelegate.swift */,
+				889F2106284BA23C00C20D6F /* Notifications.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -173,6 +181,7 @@
 		880FB4112819C2EC002DB701 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88395590284CD24F0045D513 /* OnboardingVC */,
 				8826BB5E281D542100C82AFC /* MainVC */,
 				8819EB9328266C6F0078008E /* NewWorkoutVC */,
 				882901B4283130A700A5CAE4 /* RepsWorkoutVC */,
@@ -261,6 +270,14 @@
 				882901B52831310300A5CAE4 /* ExerciseView.swift */,
 			);
 			path = RepsWorkoutVC;
+			sourceTree = "<group>";
+		};
+		88395590284CD24F0045D513 /* OnboardingVC */ = {
+			isa = PBXGroup;
+			children = (
+				88395591284CD2780045D513 /* OnboardingCollectionViewCell.swift */,
+			);
+			path = OnboardingVC;
 			sourceTree = "<group>";
 		};
 		88AF45CB283A75E0003E1673 /* ProfileVC */ = {
@@ -405,6 +422,7 @@
 				88EAFCA5283BB61B0012580B /* SettingsViewController.swift in Sources */,
 				882901B62831310300A5CAE4 /* ExerciseView.swift in Sources */,
 				886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */,
+				889F2107284BA23C00C20D6F /* Notifications.swift in Sources */,
 				88EAFCA7283BBF470012580B /* UserModel.swift in Sources */,
 				880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */,
 				8829C0DD281ECB9100E3B8F5 /* WorkoutTableViewCell.swift in Sources */,
@@ -417,12 +435,14 @@
 				880FB3FB2819BCBB002DB701 /* AppDelegate.swift in Sources */,
 				8819EB97282695420078008E /* RepsOrTimerView.swift in Sources */,
 				8826BB62281D71CF00C82AFC /* CalendarCollectionViewCell.swift in Sources */,
+				88395592284CD2780045D513 /* OnboardingCollectionViewCell.swift in Sources */,
 				882EFB30282195C9004837B7 /* NewWorkoutViewController.swift in Sources */,
 				8881472F2827E50D00D2BDC2 /* UILabel + Extensions.swift in Sources */,
 				882901B328312B1200A5CAE4 /* RepsWorkoutViewController.swift in Sources */,
 				880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */,
 				88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */,
 				88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */,
+				8839558F284CCF410045D513 /* OnboardingViewController.swift in Sources */,
 				88B8F4D52833E277006EF1CB /* ExerciseTimerView.swift in Sources */,
 				880FB3FD2819BCBB002DB701 /* SceneDelegate.swift in Sources */,
 				88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */,

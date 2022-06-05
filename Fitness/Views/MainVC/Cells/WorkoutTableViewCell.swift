@@ -115,7 +115,6 @@ class WorkoutTableViewCell: UITableViewCell {
     func cellConfigure(model: WorkoutModel) {
         
         workoutModel = model// !!! initially our workoutModel is empty and we need to fill it
-        print(workoutModel)
         workoutTitleLabel.text = model.workoutName
             
         let (min, sec) = model.workoutTimer.convertSeconds()

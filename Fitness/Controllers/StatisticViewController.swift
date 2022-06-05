@@ -36,6 +36,8 @@ class StatisticViewController: UIViewController {
         return label
     }()
     
+    private let nameTextField = UITextField(text: "")
+    
     lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Week", "Month"])
         control.selectedSegmentIndex = 0
@@ -71,9 +73,11 @@ class StatisticViewController: UIViewController {
     let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
     
-    var differenceArray = [DifferenceWorkout]()
+    private var differenceArray = [DifferenceWorkout]()
+    private var filteredArray = [DifferenceWorkout]()
     
     let dateToday = Date().localDate()
+    private var isFiltered = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,6 +102,7 @@ class StatisticViewController: UIViewController {
     private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        nameTextField.delegate = self
     }
     
     private func setStartScreen(){
@@ -125,6 +130,7 @@ class StatisticViewController: UIViewController {
         view.addSubview(scrollView)
         
         scrollView.addSubview(statisticsLabel)
+        scrollView.addSubview(nameTextField)
         scrollView.addSubview(segmentedControl)
         scrollView.addSubview(exercisesLabel)
         scrollView.addSubview(tableView)
@@ -172,6 +178,35 @@ class StatisticViewController: UIViewController {
             differenceArray.append(differenceWorkout)
         }
     }
+    
+    private func filtringWorkouts(text: String) {
+        
+        for workout in differenceArray {
+            if workout.name.lowercased().contains(text.lowercased()){
+                filteredArray.append(workout)
+            }
+        }
+    }
+}
+
+//MARK: -UITextFieldDelegate
+
+extension StatisticViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text){
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            filteredArray = [DifferenceWorkout]()// обнуляем
+            isFiltered = updatedText.count > 0 ? true : false
+            filtringWorkouts(text: updatedText)
+            tableView.reloadData()
+        }
+        return true
+    }//будем ли мы заменять текст в текстфилде на какой-нибудь текст, range по умолчанию = 0, текстфилд с опозданием на 1 символ
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()// скрывается клавиатура
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -188,12 +223,12 @@ extension StatisticViewController: UITableViewDelegate {
 extension StatisticViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        differenceArray.count
+        isFiltered ? filteredArray.count : differenceArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticTableViewCell, for: indexPath) as! ExercisesTableViewCell
-        let differenceModel = differenceArray[indexPath.row]
+        let differenceModel = isFiltered ? filteredArray[indexPath.row] : differenceArray[indexPath.row]
         cell.cellConfigure(differenceWorkout: differenceModel)
         return cell
     }
@@ -218,7 +253,14 @@ extension StatisticViewController {
         ])
         
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: statisticsLabel.bottomAnchor, constant: 30),
+            nameTextField.topAnchor.constraint(equalTo: statisticsLabel.bottomAnchor, constant: 10),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            nameTextField.heightAnchor.constraint(equalToConstant: 32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            segmentedControl.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])

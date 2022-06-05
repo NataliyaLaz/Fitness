@@ -27,7 +27,8 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"//we don't state 00:00, it's so by default.
         
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         let day = calendar.component(.day, from: self)
         let month = calendar.component(.month, from: self)
         let year = calendar.component(.year, from: self)
@@ -70,5 +71,12 @@ extension Date {
             weekArray[0].append(weekday)
         }
         return weekArray
+    }
+    
+    func ddMMyyyyFromDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let date = formatter.string(from: self)
+        return date
     }
 }

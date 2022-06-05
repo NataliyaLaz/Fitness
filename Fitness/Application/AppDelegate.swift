@@ -7,15 +7,22 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let notifications = Notifications()
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print( Realm.Configuration.defaultConfiguration.fileURL as Any)
         // Override point for customization after application launch.
+        
+        notifications.requestAuthorization()
+        notifications.notificationCenter.delegate = notifications
+        
         return true
     }
 
