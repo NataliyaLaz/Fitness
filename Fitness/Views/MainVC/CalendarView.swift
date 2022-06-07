@@ -23,6 +23,8 @@ class CalendarView: UIView {
     
     private let idCalendarCell = "idCalendarCell"
     
+    var daysOffset = 0
+    
     weak var cellCollectionViewDelegate: SelectCollectionViewItemProtocol?
     
     override init(frame: CGRect) {
@@ -64,13 +66,20 @@ extension CalendarView: UICollectionViewDelegate {
         
         switch indexPath.item {//if we had our dates not backward we could make our code even shorter ( 1 line with days: indexpath)
         case 0: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 6))
+            daysOffset = 6
         case 1: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 5))
+            daysOffset = 5
         case 2: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 4))
+            daysOffset = 4
         case 3: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 3))
+            daysOffset = 3
         case 4: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 2))
+            daysOffset = 2
         case 5: cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 1))
+            daysOffset = 1
         default:
             cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 0))
+            daysOffset = 0
         }
     }
 }

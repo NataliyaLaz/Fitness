@@ -106,7 +106,10 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         setupUserParameters()
         print ("MainViewController viewWillAppear")
-        getWorkouts(date: Date())
+        
+        let dateTimeZone = Date().localDate()
+        selectItem(date: dateTimeZone.offsetDays(days: calendarView.daysOffset))
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
