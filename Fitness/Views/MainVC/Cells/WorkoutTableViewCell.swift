@@ -31,7 +31,8 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private let workoutImageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "workoutImage")
+        view.image = UIImage(named: "workoutImage")?.withRenderingMode(.alwaysTemplate)
+        view.tintColor = .specialDarkGreen
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -125,7 +126,8 @@ class WorkoutTableViewCell: UITableViewCell {
         guard let imageData = model.workoutImage else { return}
         guard let image = UIImage(data: imageData) else { return}
         
-        workoutImageView.image = image
+        workoutImageView.image = image.withRenderingMode(.alwaysTemplate)
+        workoutImageView.tintColor = .specialDarkGreen
         
         if model.status {
             startButton.setTitle("COMPLETE", for: .normal)

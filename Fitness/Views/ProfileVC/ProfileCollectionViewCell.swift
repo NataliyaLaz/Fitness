@@ -24,8 +24,8 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     private let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
-        imageView.tintColor = .white
         imageView.image = UIImage(named: "upperBody")?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -69,7 +69,8 @@ class ProfileCollectionViewCell: UICollectionViewCell {
             repsTotalLabel.text = String(model.result)
         }
         guard let data = model.imageData else { return }
-        exerciseImageView.image = UIImage(data: data)
+        exerciseImageView.image = UIImage(data: data)?.withRenderingMode(.alwaysTemplate).withTintColor(.white)
+        
     }
     
     private func setConstraints() {

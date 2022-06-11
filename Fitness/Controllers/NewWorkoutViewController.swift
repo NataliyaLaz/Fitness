@@ -43,6 +43,17 @@ class NewWorkoutViewController: UIViewController{
     
     private let repsOrTimerLabel = UILabel(text: "Reps or timer")
     
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.bounces = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .specialGreen
@@ -64,6 +75,12 @@ class NewWorkoutViewController: UIViewController{
     
     private let testImage = UIImage(named: "workoutImage")
     
+    private let idImageCell = "idImageCell"
+    
+    private let imageArray = [#imageLiteral(resourceName: "upperBody"), #imageLiteral(resourceName: "workoutImageFirst"), #imageLiteral(resourceName: "workoutImageThird"), #imageLiteral(resourceName: "workoutImageSecond")]
+    
+    private var selectedImageIndex = 0
+    
     override func viewDidLayoutSubviews() {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
     }
@@ -75,6 +92,7 @@ class NewWorkoutViewController: UIViewController{
         setConstraints()
         setDelegates()
         addTaps()
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: idImageCell)
     }
     
     deinit {
@@ -95,11 +113,14 @@ class NewWorkoutViewController: UIViewController{
         scrollView.addSubview(dateAndRepeatView)
         scrollView.addSubview(repsOrTimerLabel)
         scrollView.addSubview(repsOrTimerView)
+        scrollView.addSubview(collectionView)
         scrollView.addSubview(saveButton)
     }
     
     private func setDelegates() {
         nameTextField.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     @objc private func closeButtonTapped() {
@@ -143,9 +164,11 @@ class NewWorkoutViewController: UIViewController{
         workoutModel.workoutSets = Int(repsOrTimerView.setsSlider.value)
         workoutModel.workoutReps = Int(repsOrTimerView.repsSlider.value)
         workoutModel.workoutTimer = Int(repsOrTimerView.timerSlider.value)
-        
-        guard let imageData = testImage?.pngData() else { return }
+        guard let imageData = imageArray[selectedImageIndex].pngData() else { return }
         workoutModel.workoutImage = imageData
+        
+//        guard let imageData = testImage?.pngData() else { return }
+//        workoutModel.workoutImage = imageData
     }
     
     private func saveModel() {
@@ -184,7 +207,32 @@ class NewWorkoutViewController: UIViewController{
     }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension NewWorkoutViewController: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: collectionView.frame.height/1,
+               height: collectionView.frame.height/1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        18
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        18
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectedImageIndex = (indexPath.row)
+    }
+}
+
 //MARK: - UITextFieldDelegate
+
 extension NewWorkoutViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -192,9 +240,25 @@ extension NewWorkoutViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - UICollectionViewDataSource
 
+extension NewWorkoutViewController: UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        imageArray.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idImageCell, for: indexPath) as! ImageCollectionViewCell
+        let image = imageArray[indexPath.row]
+        cell.cellConfigure(image: image)
+        cell.backgroundColor = .specialGreen
+        return cell
+    }
+}
 
 //MARK: - SetConstraints
+
 extension NewWorkoutViewController {
     
     private func setConstraints() {
@@ -259,7 +323,14 @@ extension NewWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 20),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            collectionView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            saveButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 55),
