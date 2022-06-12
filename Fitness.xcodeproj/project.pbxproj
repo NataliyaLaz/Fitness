@@ -19,6 +19,9 @@
 		880FB41F2819C5C8002DB701 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB41E2819C5C8002DB701 /* UIView + Extensions.swift */; };
 		880FB4212819C5E5002DB701 /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */; };
 		881828F228546F0C0089BF17 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881828F128546F0C0089BF17 /* ImageCollectionViewCell.swift */; };
+		881828F52854C4B40089BF17 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881828F42854C4B40089BF17 /* NetworkRequest.swift */; };
+		881828F72854D3EE0089BF17 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881828F62854D3EE0089BF17 /* NetworkDataFetch.swift */; };
+		881828F92854D4D20089BF17 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881828F82854D4D20089BF17 /* WeatherModel.swift */; };
 		8819EB9528266CC20078008E /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB9428266CC20078008E /* DateAndRepeatView.swift */; };
 		8819EB97282695420078008E /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819EB96282695420078008E /* RepsOrTimerView.swift */; };
 		882465C42834FB000090EC45 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882465C32834FB000090EC45 /* Date + Extension.swift */; };
@@ -69,6 +72,9 @@
 		880FB41E2819C5C8002DB701 /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		880FB4202819C5E5002DB701 /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		881828F128546F0C0089BF17 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		881828F42854C4B40089BF17 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		881828F62854D3EE0089BF17 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
+		881828F82854D4D20089BF17 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		8819EB9428266CC20078008E /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
 		8819EB96282695420078008E /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
 		882465C32834FB000090EC45 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 				880FB4112819C2EC002DB701 /* Views */,
 				880FB40E2819C108002DB701 /* Controllers */,
 				88CA6E2D2829311500961DF9 /* Services */,
+				881828F32854C4790089BF17 /* Network */,
 				880FB4122819C317002DB701 /* Extensions */,
 				880FB4142819C33A002DB701 /* Resources */,
 			);
@@ -176,6 +183,7 @@
 			children = (
 				88CA6E2B2829115800961DF9 /* WorkoutModel.swift */,
 				88EAFCA6283BBF470012580B /* UserModel.swift */,
+				881828F82854D4D20089BF17 /* WeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -244,6 +252,15 @@
 				881828F128546F0C0089BF17 /* ImageCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		881828F32854C4790089BF17 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				881828F42854C4B40089BF17 /* NetworkRequest.swift */,
+				881828F62854D3EE0089BF17 /* NetworkDataFetch.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8819EB9328266C6F0078008E /* NewWorkoutVC */ = {
@@ -431,6 +448,7 @@
 				888147292827D39F00D2BDC2 /* MainTabBarController.swift in Sources */,
 				8826BB60281D546800C82AFC /* CalendarView.swift in Sources */,
 				88EAFCA5283BB61B0012580B /* SettingsViewController.swift in Sources */,
+				881828F92854D4D20089BF17 /* WeatherModel.swift in Sources */,
 				882901B62831310300A5CAE4 /* ExerciseView.swift in Sources */,
 				886F14722837C5E900A6D22E /* Int + Extension.swift in Sources */,
 				889F2107284BA23C00C20D6F /* Notifications.swift in Sources */,
@@ -455,7 +473,9 @@
 				88CA6E2F2829317A00961DF9 /* RealmManager.swift in Sources */,
 				88CA6E322829401200961DF9 /* SimpleAlert.swift in Sources */,
 				8839558F284CCF410045D513 /* OnboardingViewController.swift in Sources */,
+				881828F52854C4B40089BF17 /* NetworkRequest.swift in Sources */,
 				88B8F4D52833E277006EF1CB /* ExerciseTimerView.swift in Sources */,
+				881828F72854D3EE0089BF17 /* NetworkDataFetch.swift in Sources */,
 				880FB3FD2819BCBB002DB701 /* SceneDelegate.swift in Sources */,
 				88B8F4D02833A243006EF1CB /* OkCancelAlert.swift in Sources */,
 				8881472B2827D6F300D2BDC2 /* StatisticViewController.swift in Sources */,

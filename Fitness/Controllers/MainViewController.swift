@@ -110,6 +110,7 @@ class MainViewController: UIViewController {
         let dateTimeZone = Date().localDate()
         selectItem(date: dateTimeZone.offsetDays(days: calendarView.daysOffset))
         
+        getWeather()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -193,6 +194,22 @@ class MainViewController: UIViewController {
             let onboardingViewController = OnboardingViewController()
             onboardingViewController.modalPresentationStyle = .fullScreen
             present(onboardingViewController,animated: false)
+        }
+    }
+    
+    private func getWeather() {
+        NetworkDataFetch.shared.fetchWeather { [weak self] model, error in
+            guard let self = self else { return }
+            if error == nil {
+                guard let model = model else { return }
+                self.weatherView.weatherStateLabel.text = "\(model.weather[0].iconDescription) \(model.main.temperatureInt)°C"
+                self.weatherView.weatherAdviceLabel.text = model.weather[0].iconAdvice
+                
+                guard let imageIcon = model.weather[0].icon else { return}
+                self.weatherView.weatherImageView.image = UIImage(named: imageIcon)
+            } else {
+                self.alertOK(title: "Error", message: "No weather data")
+            }
         }
     }
 }

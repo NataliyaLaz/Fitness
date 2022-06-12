@@ -9,17 +9,17 @@ import UIKit
 
 class WeatherView: UIView {
     
-    private let weatherImageView: UIImageView = {
+    let weatherImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "sun")
+        imageView.image = UIImage(named: "circle")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let weatherStateLabel: UILabel = {
+    let weatherStateLabel: UILabel = {
         let label = UILabel()
         label.font = .robotoMedium18()
-        label.text = "Sunny"
+        label.text = "No weather data"
         label.textColor = .specialGray
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -28,9 +28,9 @@ class WeatherView: UIView {
         return label
     }()
     
-    private let weatherAdviceLabel: UILabel = {
+    let weatherAdviceLabel: UILabel = {
         let label = UILabel()
-        label.text = "The best time to have training outdoors. Finish your day with running"
+        label.text = "No weather data, but training is always a good idea"
         label.font = .robotoMedium14()
         label.textColor = .specialLightBrown
         label.numberOfLines = 2
