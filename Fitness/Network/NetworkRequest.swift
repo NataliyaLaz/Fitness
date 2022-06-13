@@ -14,7 +14,7 @@ class NetworkRequest{
     
     func requestData(completion: @escaping(Result<Data, Error>) -> Void){
         
-        let key = "7d9421820b3edf24bdd3268dac110cda"
+        let key = ""
         let latitude = 55.29
         let longitude = 28.48
         
